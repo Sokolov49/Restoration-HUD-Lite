@@ -1,10 +1,3 @@
-if _G.IS_VR then
-	return
-end
-if not restoration:all_enabled("HUD/MainHUD", "HUD/Teammate") then
-	return
-end
-
 function HUDTeammate:init(i, teammates_panel, is_player, width)
 	self._id = i
 	local small_gap = 8
@@ -321,7 +314,7 @@ Hooks:OverrideFunction(HUDTeammate, "_create_radial_health", function(self, radi
 		h = radial_health_panel:h()
 	})
 	local radial_health = radial_health_panel:bitmap({
-		texture = "guis/textures/restoration/hud_health",
+		texture = "guis/textures/pd2/hud_health",
 		name = "radial_health",
 		layer = 2,
 		blend_mode = "add",
@@ -337,7 +330,7 @@ Hooks:OverrideFunction(HUDTeammate, "_create_radial_health", function(self, radi
 		h = radial_health_panel:h()
 	})
 	local radial_shield = radial_health_panel:bitmap({
-		texture = "guis/textures/restoration/hud_shield",
+		texture = "guis/textures/pd2/hud_shield",
 		name = "radial_shield",
 		layer = 1,
 		blend_mode = "add",
@@ -356,7 +349,7 @@ Hooks:OverrideFunction(HUDTeammate, "_create_radial_health", function(self, radi
 		blend_mode = "add",
 		name = "damage_indicator",
 		alpha = 0,
-		texture = "guis/textures/restoration/hud_radial_rim",
+		texture = "guis/textures/pd2/hud_radial_rim",
 		layer = 1,
 		color = Color(1, 1, 1, 1),
 		w = radial_health_panel:w(),
@@ -409,7 +402,7 @@ Hooks:OverrideFunction(HUDTeammate, "_create_radial_health", function(self, radi
 		h = radial_delayed_damage_panel:h()
 	})
 	local radial_delayed_damage_health = radial_delayed_damage_panel:bitmap({
-		texture = "guis/textures/restoration/hud_dot",
+		texture = "guis/textures/pd2/hud_dot",
 		name = "radial_delayed_damage_health",
 		visible = false,
 		render_template = "VertexColorTexturedRadialFlex",
@@ -420,7 +413,7 @@ Hooks:OverrideFunction(HUDTeammate, "_create_radial_health", function(self, radi
 
 	if self._main_player then
 		local radial_rip = radial_health_panel:bitmap({
-			texture = "guis/textures/restoration/hud_rip",
+			texture = "guis/textures/pd2/hud_rip",
 			name = "radial_rip",
 			layer = 3,
 			blend_mode = "add",
@@ -437,7 +430,7 @@ Hooks:OverrideFunction(HUDTeammate, "_create_radial_health", function(self, radi
 			h = radial_health_panel:h()
 		})
 		local radial_rip_bg = radial_health_panel:bitmap({
-			texture = "guis/textures/restoration/hud_rip_bg",
+			texture = "guis/textures/pd2/hud_rip_bg",
 			name = "radial_rip_bg",
 			layer = 1,
 			visible = false,
@@ -455,7 +448,7 @@ Hooks:OverrideFunction(HUDTeammate, "_create_radial_health", function(self, radi
 	end
 
 	radial_health_panel:bitmap({
-		texture = "guis/textures/restoration/hud_absorb_shield",
+		texture = "guis/textures/pd2/hud_absorb_shield",
 		name = "radial_absorb_shield_active",
 		visible = false,
 		render_template = "VertexColorTexturedRadial",
@@ -466,7 +459,7 @@ Hooks:OverrideFunction(HUDTeammate, "_create_radial_health", function(self, radi
 	})
 
 	local radial_absorb_health_active = radial_health_panel:bitmap({
-		texture = "guis/textures/restoration/hud_absorb_health",
+		texture = "guis/textures/pd2/hud_absorb_health",
 		name = "radial_absorb_health_active",
 		visible = false,
 		render_template = "VertexColorTexturedRadial",
@@ -478,7 +471,7 @@ Hooks:OverrideFunction(HUDTeammate, "_create_radial_health", function(self, radi
 
 	radial_absorb_health_active:animate(callback(self, self, "animate_update_absorb_active"))
 	radial_health_panel:bitmap({
-		texture = "guis/textures/restoration/hud_absorb_stack_fg",
+		texture = "guis/textures/pd2/hud_absorb_stack_fg",
 		name = "radial_info_meter",
 		blend_mode = "add",
 		visible = false,
@@ -489,7 +482,7 @@ Hooks:OverrideFunction(HUDTeammate, "_create_radial_health", function(self, radi
 		h = radial_health_panel:h()
 	})
 	radial_health_panel:bitmap({
-		texture = "guis/textures/restoration/hud_absorb_stack_bg",
+		texture = "guis/textures/pd2/hud_absorb_stack_bg",
 		name = "radial_info_meter_bg",
 		layer = 1,
 		visible = false,
@@ -730,7 +723,7 @@ function HUDTeammate:_create_equipment_panels(player_panel, x, top, bottom)
 		visible = false,
 		text = tostring(12),
 		font = tweak_data.menu.small_font,
-		font_size = 14,
+		font_size = 18,
 		color = Color.white,
 		align = "right",
 		vertical = "top",
@@ -778,7 +771,7 @@ function HUDTeammate:_create_equipment_panels(player_panel, x, top, bottom)
 		visible = false,
 		text = tostring(12),
 		font = tweak_data.menu.small_font,
-		font_size = 14,
+		font_size = 18,
 		color = Color.white,
 		align = "right",
 		vertical = "top",
@@ -817,11 +810,7 @@ function HUDTeammate:set_name(teammate_name)
 	local name_bg = teammate_panel:child("name_bg")
 	local callsign = teammate_panel:child("callsign")
 	local name_text
-	if restoration.Options:GetValue("HUD/UppercaseNames") then
-	    name_text = utf8.to_upper( " "..teammate_name )
-	else
-	    name_text = " "..teammate_name
-	end
+	name_text = utf8.to_upper( " "..teammate_name )
 	name:set_text( string.shorten(name_text, 23, false) )
 	local h = name:h()
 	managers.hud:make_fine_text(name)
@@ -884,7 +873,6 @@ function HUDTeammate:set_grenades(data)
 					noflashing = true,
                     amount = data.amount
                 })
-				restoration.log_shit("[RESTORATION] Added a grenade panel.")
             else
                 return
             end
@@ -971,7 +959,6 @@ function HUDTeammate:layout_special_equipments()
 		else
 			local j = i < 7 and (1 + math.mod( i-1, 3 )) or i - 3
 			local y = i > 3 and 0 or panel:h()
-			restoration.log_shit("J = " .. j .. "I = " .. i)
 			local x_offset = i > 3 and panel:w()/2 or 0
 			panel:set_x( w - (panel:w() + 0) * (j) - x_offset )
 			panel:set_y( y )
@@ -1097,7 +1084,7 @@ function HUDTeammate:set_special_equipment_amount(equipment_id, amount)
 			if panel:name() == "grenades_panel" then
 				panel:child("amount"):set_visible(true)
 				panel:child("amount_bg"):set_visible(true)
-				panel:child("bitmap"):set_alpha(amount > 0 and 1 or 0.5)
+				panel:child("bitmap"):set_alpha(amount > 0 and 0.85 or 0.5)
 			end
 			return
 		end
@@ -1115,7 +1102,7 @@ function HUDTeammate:teammate_progress(enabled, tweak_data_id, timer, success)
 		local panel = self._player_panel
 		local bitmap = panel:bitmap({
 			blend_mode = "add",
-			texture = "guis/textures/restoration/hud_progress_active",
+			texture = "guis/textures/pd2/hud_progress_32px",
 			layer = 2,
 			align = "center",
 			rotation = 360,
@@ -1140,7 +1127,7 @@ function HUDTeammate:teammate_progress(enabled, tweak_data_id, timer, success)
 end
 
 function HUDTeammate:set_voice_com(status)
-	local texture = status and "guis/textures/pd2/jukebox_playing" or "guis/textures/pd2/hud_tabs"
+	local texture = status and "guis/textures/pd2/jukebox_playing" or "guis/textures/restoration/hud_tabs"
 	local texture_rect = status and { 0, 0, 16, 16 } or { 84, 34, 19, 19 }
 	local callsign = self._panel:child("callsign")
 	callsign:set_image(texture, unpack(texture_rect))

@@ -1,17 +1,3 @@
-if not restoration.Options:GetValue("HUD/MainHUD") then
-	return
-end
-
-RestorationCoreHooks:Pre(HUDManager, "_setup_player_info_hud_pd2", function(self)
-	RestorationCoreCallbacks:AddValueChangedFunc(callback(self, self, "RestorationValueChanged"))
-	self:RestorationValueChanged()
-end)
-
-function HUDManager:RestorationValueChanged()
-	managers.gui_data:layout_scaled_fullscreen_workspace(self._saferect, restoration.Options:GetValue("HUD/Extra/Scale"), restoration.Options:GetValue("HUD/Extra/SizeOnScreen"))
-end
-
-if restoration.Options:GetValue("HUD/NameLabels") then
 	function HUDManager:_add_name_label(data)
 		local hud = managers.hud:script(PlayerBase.PLAYER_INFO_HUD_FULLSCREEN_PD2)
 		local last_id = self._hud.name_labels[#self._hud.name_labels] and self._hud.name_labels[#self._hud.name_labels].id or 0
@@ -130,10 +116,7 @@ if restoration.Options:GetValue("HUD/NameLabels") then
 		})
 		return id
 	end
-end
 
-if restoration.Options:GetValue("HUD/Waypoints") then
-	--fix format here
 	function HUDManager:add_waypoint( id, data )
 		if self._hud.waypoints[ id ] then
 			self:remove_waypoint( id )
@@ -228,12 +211,7 @@ if restoration.Options:GetValue("HUD/Waypoints") then
 			self._hud.waypoints[ id ].slot_x = -t[ 1 ]/2 - t[ 3 ] - self._hud.waypoints[ id ].text:w()/2 - 10 * 2
 		end
 	end
-end
 
-if restoration:all_enabled("HUD/MainHUD", "HUD/Teammate") then
-	if _G.IS_VR then
-		return
-	end
 	function HUDManager:_create_teammates_panel(hud)
 		HUDManager.PLAYER_PANEL = _G.BigLobbyGlobals and BigLobbyGlobals:num_player_slots() or 4
 		hud = hud or managers.hud:script(PlayerBase.PLAYER_INFO_HUD_PD2)
@@ -296,7 +274,7 @@ if restoration:all_enabled("HUD/MainHUD", "HUD/Teammate") then
 				local panel = name_label.panel
 				local bitmap = panel:bitmap({
 					rotation = 360,
-					texture = "guis/textures/restoration/hud_progress_active",
+					texture = "guis/textures/pd2/hud_progress_32px",
 					blend_mode = "add",
 					align = "center",
 					valign = "center",
@@ -344,4 +322,3 @@ if restoration:all_enabled("HUD/MainHUD", "HUD/Teammate") then
 			end
 		end
 	end
-end

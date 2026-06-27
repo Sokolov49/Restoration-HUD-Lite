@@ -1,10 +1,3 @@
-if _G.IS_VR then
-	return
-end
-if not restoration:all_enabled("HUD/MainHUD", "HUD/Custody") then
-	return
-end
-
 function HUDPlayerCustody:init(hud)
 	self._hud = hud
 	self._hud_panel = hud.panel

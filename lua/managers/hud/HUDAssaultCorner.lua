@@ -1,50 +1,9 @@
-if not restoration:all_enabled("HUD/MainHUD", "HUD/AssaultPanel") then
-	return
-end
-
-HUDAssaultCorner._custom_lines_casing = {
-	"GUYS, THE THERMAL DRILL - GO GET IT",
-	"I'M NOT HERE FOR YOUR ENTERTAINMENT",
-	"DO YOU PLAN ON MASKING UP ANYTIME SOON?",
-	"NOBODY CARED WHO I WAS, CAUSE I STILL HADN'T MASKED UP",
-	"CREDITS    ///    CGNICK, KAILLUS, WILKO, I AM NOT A SPY, BATTLE DOG, ZDANN, SUPER MUFFIN, WOLFY, GREAT BIG BUSHY BEARD, WILLCARIO, OLIPRO, INSANO-MAN, MELONIOUS, BENEDICT, SEVEN, PORKY-DA-CORGI, DOKTOR AKCEL, A.J. VALENTINE, TOM SEA, MUD, KRYMXON, SC, ELYSIUM, GARRETT, WHITE3DESIGNER, BMSTU_HEDGEHOG, SIX-DEMON BAG, SOME NAME HERE, REZULUX, BANGL, TONIS, FENDERMCBENDER, VICIOUSWALRUS, EDISLEADO, RINO, TEACYN, FUGLORE, JAREY, RAVICALE, HOXI, VXWOLF, KARL LAKNER, AND EVERYONE ELSE AT OVERKILL SOFTWARE AND STARBREEZE AB    ///    THANK YOU EVERYONE <3",
-	"CONGRATULATIONS!  YOU ARE OUR 1000TH VISITOR!",
-	"WOW.. THAT CREDITS SURE IS LONG, AIN'T IT?  CAN WE GET IT LONGER...?",
-	"BEGINNING VIRTUOUS MISSION...",
-	"I'm the casing mode ticker!  I'm not in the mod anymore.  Isn't that unfortunate?  If for some reason you're seeing me, please alert the team right away.  Thanks!",
-}
-HUDAssaultCorner._custom_lines_assault = {
-	"DON'T DIE",
-	"JUST KEEP TAPPING",
-	"JUST KEEP TAPDANCING",
-	"TOOK ONE IN THE CHICKENPLATE!",
-	"SONG NAME?",
-	"HOW LONG IS THIS TAPE ANYWAY?",
-	"IS THAT A CLOAKER BEHIND YOU",
-	"DRILL JAMMING IN PROGRESS",
-	"KEEP AN EYE OPEN FOR FLASHBANGS... OR... DON'T KEEP AN EYE OPEN... LOOK, YOU KNOW WHAT I MEAN.",
-	"Hey!  This is Jackal.  While you're out, can you grab me a snack?  I'm pretty hungry... something with a lot of veggies, I'm thinking.  If you can find some almonds too, that'd be great.  Thanks a bunch.",
-}
-HUDAssaultCorner._custom_lines_phalanx = {
-	"POINT OF NO RETURN IN... JUST KIDDING",
-	"YOU'RE ABOUT TO GET OUTGUNNED",
-	"DON'T STAY IN COVER, SHOOT THE ASSHOLES!",
-	"THIS IS ONE ASSAULT WAVE THAT WILL NEVER END!  ALL YOU CAN DO NOW IS FIGHT!",
-	"THE ASSAULT WAVE IS JAMMED, YOU GOTTA FIX IT!",
-	"NOW GIVE THEM HELL",
-	"HERE THEY COME",
-	"GUN UP, CREW",
-}
-HUDAssaultCorner._custom_lines_civilian = {
-	"I AM TEXT BLOCK.",
-	"YOU ARE IN CASING MODE.  MASK UP TO START THE... WAIT, SHIT",
-	"I'm the civilian mode ticker!  I'm not in the mod anymore.  Isn't that unfortunate?  If for some reason you're seeing me, please alert the team right away.  Thanks!",
-}
-HUDAssaultCorner._custom_lines_ponr = {
-	"RUN, RUN GOD DAMN IT",
-	"I'm the point of no return ticker!  I'm not in the mod anymore.  Isn't that unfortunate?  If for some reason you're seeing me, please alert the team right away.  Thanks!",
-}
-HUDAssaultCorner._custom_line_chance = 2 -- Chance of a new line, between 0-100
+HUDAssaultCorner._custom_lines_casing = {}
+HUDAssaultCorner._custom_lines_assault = {}
+HUDAssaultCorner._custom_lines_phalanx = {}
+HUDAssaultCorner._custom_lines_civilian = {}
+HUDAssaultCorner._custom_lines_ponr = {}
+HUDAssaultCorner._custom_line_chance = 0 -- Chance of a new line, between 0-100
 
 function HUDAssaultCorner:init(hud, full_hud)
 	self._hud_panel = hud.panel
@@ -63,9 +22,9 @@ function HUDAssaultCorner:init(hud, full_hud)
 	assault_panel:set_center( self._hud_panel:w(), 0 )
 	--assault_panel:set_right( self._hud_panel:w() )
 	self._assault_mode = "normal"
-	self._assault_color = restoration.Options:GetValue("HUD/Colors/AssaultBG")
-	self._vip_assault_color = restoration.Options:GetValue("HUD/Colors/AssaultEndlessBG")
-	self._assault_survived_color = restoration.Options:GetValue("HUD/Colors/AssaultSurvivedBG")
+	self._assault_color = Color(1, 0.8, 0)
+	self._vip_assault_color = Color(1, 0.5, 0)
+	self._assault_survived_color = Color(0.12, 0.9, 0.12)
 	self._current_assault_color = self._assault_color
 	local icon_assaultbox = assault_panel:bitmap({
 		halign = "right",
@@ -217,7 +176,7 @@ function HUDAssaultCorner:init(hud, full_hud)
 		})
 		local waves_icon = wave_panel:bitmap({
 			name = "waves_icon",
-			texture = "guis/textures/restoration/hud_icons",
+			texture = "guis/textures/pd2/hud_icons",
 			texture_rect = {
 				240,
 				48,
@@ -381,7 +340,7 @@ function HUDAssaultCorner:init(hud, full_hud)
 	vip_icon_:set_y(15)
 	vip_icon_:set_x(0)
 	
-	local texture_new = "guis/textures/restoration/objective"
+	local texture_new = "guis/textures/pd2/objective"
 	local buff_start = buffs_pad_panel:bitmap( { name = "buff_start", texture = texture_new, color = self._vip_assault_color, texture_rect = { 0, 0, 13, 64 }, layer = 1} )
 	local buff_mid = buffs_pad_panel:bitmap( { name = "buff_mid", texture_rect = { 19, 0, 33, 64 }, color = self._vip_assault_color, layer = 1, texture = texture_new} )
 	local buff_end = buffs_pad_panel:bitmap( { name = "buff_end", texture_rect = { 52, 0, 12, 64 }, color = self._vip_assault_color, layer = 1, texture = texture_new} )
@@ -410,17 +369,17 @@ function HUDAssaultCorner:init(hud, full_hud)
 end
 
 function HUDAssaultCorner:RestorationValueChanged()
-	self._assault_color = restoration.Options:GetValue("HUD/Colors/AssaultBG")
-	self._vip_assault_color = restoration.Options:GetValue("HUD/Colors/AssaultEndlessBG")
-	self._assault_survived_color = restoration.Options:GetValue("HUD/Colors/AssaultSurvivedBG")
+	self._assault_color = Color(1, 0.8, 0)
+	self._vip_assault_color = Color(1, 0.5, 0)
+	self._assault_survived_color = Color(0.12, 0.9, 0.12)
 	local point = self._hud_panel:child("point_of_no_return_panel")
-	local point_color = restoration.Options:GetValue("HUD/Colors/NoReturnText")
+	local point_color = Color.red
 	point:child("point_of_no_return_text"):set_color(point_color)
 	point:child("point_of_no_return_timer"):set_color(point_color)
 	self._noreturn_color = point_color
 	
 	local hostages = self._hud_panel:child("hostages_panel")
-	local hostages_color = restoration.Options:GetValue("HUD/Colors/HostagesText")
+	local hostages_color = Color.white
 	hostages:child("hostages_icon"):set_color(hostages_color)
 	hostages:child("num_hostages"):set_color(hostages_color)
 end
@@ -482,7 +441,7 @@ function HUDAssaultCorner:_animate_text(text_panel, bg_box, color, color_functio
 			align = "center",
 			vertical = "center",
 			rotation = 30,
-			color = restoration.Options:GetValue("HUD/Colors/AssaultFG"),
+			color = Color.black,
 			font_size = tweak_data.hud_corner.assault_size * 1.2,
 			font = tweak_data.hud_corner.assault_font,
 			w = 10,
@@ -606,9 +565,7 @@ function HUDAssaultCorner:sync_start_assault(assault_number)
 	if self._point_of_no_return or self._casing then
 		return
 	end
-		if restoration.Options:GetValue("HUD/Hostage") then
-			self:_hide_hostages()
-		end
+	self:_hide_hostages()
 	local corner_panel = self._hud_panel:child("corner_panel")
 	local color = self._assault_color
 	local corner_color = self._assault_corner_color
@@ -732,10 +689,9 @@ function HUDAssaultCorner:_start_assault(text_list)
 	else
 		assault_panel:panel({name = "text_panel"})
 	end
-	corner_panel:set_visible(restoration.Options:GetValue("HUD/AssaultStyle") == 2)
 	corner_panel:stop()
 	corner_panel:animate(callback(self, self, "_animate_assault_corner"))
-	assault_panel:set_visible(restoration.Options:GetValue("HUD/AssaultStyle") == 1)
+	assault_panel:set_visible(true)
 	text_panel:stop()
 	assault_panel:stop()
 	assault_panel:animate(callback(self, self, "_animate_assault"))
@@ -804,20 +760,13 @@ function HUDAssaultCorner:_end_assault()
 	--self._hud_panel:child("assault_panel"):child("text_panel"):stop()
 	--self._hud_panel:child("assault_panel"):child("text_panel"):clear()
 	if self:has_waves() then
-		assault_panel:set_visible(restoration.Options:GetValue("HUD/AssaultStyle") == 1)
+		assault_panel:set_visible(true)
 		wave_panel = self._hud_panel:child("wave_panel")
 		self:_update_assault_hud_color(self._assault_survived_color)
 		self:_set_text_list(self:_get_survived_assault_strings())
 		text_panel:animate(callback(self, self, "_animate_text"), nil, nil, nil)
 		self._hud_panel:child("wave_panel"):set_visible(true)		
 		wave_panel:animate(callback(self, self, "_animate_wave_completed"), self)
-		if restoration.Options:GetValue("HUD/AssaultStyle") == 2 then
-			corner_panel:child( "corner" ):set_color(self._wave_corner_color)
-			corner_panel:child( "corner2" ):set_color(self._wave_corner2_color)
-			corner_panel:child( "corner_title" ):set_text("YOU SURVIVED")
-			corner_panel:set_visible(true)
-			corner_panel:animate(callback(self, self, "_animate_wave_corner"))
-		end
 		
 		if managers.skirmish:is_skirmish() then
 			self:_popup_wave_finished()
@@ -891,7 +840,7 @@ function HUDAssaultCorner:_set_hostage_offseted(is_offseted)
 end
 function HUDAssaultCorner:_offset_hostage(is_offseted, hostage_panel)
 	local TOTAL_T = 0.18
-	local OFFSET = restoration.Options:GetValue("HUD/AssaultStyle") == 2 and self._hud_panel:child("corner_panel"):h() or self._hud_panel:child("assault_panel"):h() + 8
+	local OFFSET = self._hud_panel:child("assault_panel"):h() + 8
 	local from_y = is_offseted and 0 or OFFSET
 	local target_y = is_offseted and OFFSET or 0
 	local t = (1 - math.abs(hostage_panel:y() - target_y) / OFFSET) * TOTAL_T
@@ -904,10 +853,8 @@ function HUDAssaultCorner:_offset_hostage(is_offseted, hostage_panel)
 			self._start_assault_after_hostage_offset = nil
 			self:start_assault_callback()
 		end
-		if hostage_panel:y() == 0 and restoration.Options:GetValue("HUD/AssaultStyle") == 1 then
+		if hostage_panel:y() == 0 then
 			wait(1)
-			self:_show_hostages()
-		elseif hostage_panel:y() == 0 and restoration.Options:GetValue("HUD/AssaultStyle") == 2 then
 			self:_show_hostages()
 		end
 	end

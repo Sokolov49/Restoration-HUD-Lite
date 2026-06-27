@@ -1,10 +1,6 @@
 if _G.IS_VR then
 	return
 end
-if not restoration:all_enabled("HUD/MainHUD", "HUD/Hint") then
-	return
-end
-
 RestorationCoreHooks:Post(HUDHint, "init", function(self)
 	self._hint_panel:set_center_y(self._hud_panel:h() / 2.7)
 	local function hide_shit(o)
@@ -16,7 +12,7 @@ RestorationCoreHooks:Post(HUDHint, "init", function(self)
 	hide_shit(self._hint_panel:child("clip_panel"))
 	self._hint_panel:text({
 		name = "hint_text",
-		font_size = 32,
+		font_size = 24,
 		font = tweak_data.menu.medium_font_no_outline,
 		align = "center",
 		vertical = "center",
@@ -24,13 +20,13 @@ RestorationCoreHooks:Post(HUDHint, "init", function(self)
 		wrap = false,
 		word_wrap = false
 	})
-	self._hint_panel:text({name = "hint_shadow_text", font_size = 32, font = tweak_data.menu.medium_font_no_outline, color = Color.black, align = "center", vertical = "center", layer = 0, wrap = false, word_wrap = false, y = 1, x = 1})
+	self._hint_panel:text({name = "hint_shadow_text", font_size = 24, font = tweak_data.menu.medium_font_no_outline, color = Color.black, align = "center", vertical = "center", layer = 0, wrap = false, word_wrap = false, y = 1, x = 1})
 	RestorationCoreCallbacks:AddValueChangedFunc(callback(self, self, "RestorationValueChanged"))
 	self:RestorationValueChanged()
 end)
 
 function HUDHint:RestorationValueChanged()
-	self._hint_panel:child("hint_text"):set_color(restoration.Options:GetValue("HUD/Colors/HintText"))
+	self._hint_panel:child("hint_text"):set_color(Color.white)
 	--maybe also shadow color?
 end
 
@@ -62,7 +58,7 @@ function HUDHint:_animate_show(hint_panel, done_cb, seconds, text)
 			hint = hint..table.remove(split, 1)
 			hint_text:set_text(hint.."")
 			hint_shadow_text:set_text(hint.."")
-			cs = 0.025
+			cs = 0.005
 		end
 	end
 	hint_panel:hide()

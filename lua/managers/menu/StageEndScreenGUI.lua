@@ -1,4 +1,3 @@
-if restoration.Options:GetValue("HUD/UI/Loadouts") then
 function StatsTabItem:init(panel, tab_panel, text, i)
 	self._main_panel = panel
 	self._panel = self._main_panel:panel({
@@ -489,4 +488,3 @@ function StageEndScreenGui:mouse_moved(x, y)
 	end
 	return false, "arrow"
 	end
-end

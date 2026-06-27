@@ -1,10 +1,3 @@
-if _G.IS_VR then
-	return
-end
-if not restoration:all_enabled("HUD/MainHUD", "HUD/Down") then
-	return
-end
-
 RestorationCoreHooks:Post(HUDPlayerDowned, "init", function(self)
 	local downed_panel = self._hud_panel:child("downed_panel")
 	if alive(downed_panel) then

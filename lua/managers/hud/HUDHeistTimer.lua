@@ -1,7 +1,3 @@
-if not restoration:all_enabled("HUD/MainHUD", "HUD/HeistTimer") then
-	return
-end
-
 RestorationCoreHooks:Post(HUDHeistTimer, "init", function(self)
 	self._timer_text:configure({
 		font_size = tweak_data.hud_players.timer_size,
@@ -12,5 +8,5 @@ RestorationCoreHooks:Post(HUDHeistTimer, "init", function(self)
 end)
 
 function HUDHeistTimer:RestorationValueChanged()
-	self._timer_text:set_color(restoration.Options:GetValue("HUD/Colors/TimerText"))
+	self._timer_text:set_color(Color.white)
 end

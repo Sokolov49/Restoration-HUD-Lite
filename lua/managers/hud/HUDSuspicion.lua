@@ -1,25 +1,14 @@
-if _G.IS_VR then
-	return
-end
-if not restoration:all_enabled("HUD/MainHUD", "HUD/Stealth") then
-	return
-end
-
 RestorationCoreHooks:Post(HUDSuspicion, "init", function(self)
-	if not restoration.Options:GetValue("HUD/Extra/StealthOrigPos") then
-		self._suspicion_panel:set_center(self._suspicion_panel:parent():w() / 2, self._suspicion_panel:parent():h() / 6)
-	end
-	
     local s = 128
     local hud_stealth_eye = self._misc_panel:child("hud_stealth_eye")
 	local suspicion_left = self._suspicion_panel:child("suspicion_left")
 	local hud_stealth_exclam = self._misc_panel:child("hud_stealth_exclam")
-    hud_stealth_eye:set_image("guis/textures/restoration/hud_stealth_eye")
-	suspicion_left:configure({texture = "guis/textures/restoration/hud_stealthmeter", w = s, h = s})
+    hud_stealth_eye:set_image("guis/textures/pd2/hud_stealth_eye")
+	suspicion_left:configure({texture = "guis/textures/pd2/hud_stealthmeter", w = s, h = s})
 	suspicion_left:set_center(self._suspicion_panel:w() / 2, self._suspicion_panel:h() / 2)
-    hud_stealth_exclam:set_image("guis/textures/restoration/hud_stealth_exclam")
-    self._suspicion_panel:child("suspicion_right"):configure({texture = "guis/textures/restoration/hud_stealthmeter", x = suspicion_left:x(), y = suspicion_left:y(), w = s, h = s})
-    self._misc_panel:child("hud_stealthmeter_bg"):configure({texture = "guis/textures/restoration/hud_stealthmeter_bg", x = suspicion_left:x(), y = suspicion_left:y(), w = s, h = s})
+    hud_stealth_exclam:set_image("guis/textures/pd2/hud_stealth_exclam")
+    self._suspicion_panel:child("suspicion_right"):configure({texture = "guis/textures/pd2/hud_stealthmeter", x = suspicion_left:x(), y = suspicion_left:y(), w = s, h = s})
+    self._misc_panel:child("hud_stealthmeter_bg"):configure({texture = "guis/textures/pd2/hud_stealthmeter_bg", x = suspicion_left:x(), y = suspicion_left:y(), w = s, h = s})
 	self._suspicion_panel:child("suspicion_detected"):set_center(suspicion_left:center())
     local hud_stealth_cam = self._misc_panel:bitmap({
 		name = "hud_stealth_cam",

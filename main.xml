@@ -1,26 +1,26 @@
 <mod name="RestorationMod" global_key="restoration" core_class="Core.lua">
-	<!--///MOD CONFIG FILE\\\-->
     <Classes directory="classes">
 		<class file="callbacks.lua"/>
 		<class file="hooks.lua"/>
     </Classes>
-	<ScriptMods directory="scriptdata/menus">
-		<mod file="start_menu.xml" type="custom_xml" target_file="gamedata/menus/start_menu" target_type="menu" merge_mode="script_merge"/>
-	</ScriptMods>
+	<ScriptMods directory="xml">
+		<mod file="menu.xml" type="custom_xml" target_file="gamedata/menus/start_menu" target_type="menu">
+			<options merge_mode="script_merge"/>
+		</mod>
+    </ScriptMods>
     <Hooks directory="lua">
-		<!--///RESTORATION HUD & UI\\\-->
 	    <hook file="tweak_data/tweakdata.lua" source_file="lib/tweak_data/tweakdata"/>
-		<hook file="tweak_data/levelstweakdata.lua" source_file="lib/tweak_data/levelstweakdata"/>
+		<!-- <hook file="tweak_data/tweakdata.lua" source_file="lib/tweak_data/guitweakdata"/> -->
+		
 		<hook file="managers/HUDManager.lua" source_file="lib/managers/HUDManager"/>
 		<hook file="managers/HUDManagerpd2.lua" source_file="lib/managers/HUDManagerpd2"/>
 		<hook file="managers/GUIDataManager.lua" source_file="core/lib/managers/coreguidatamanager"/>
 		<hook file="managers/ChatManager.lua" source_file="lib/managers/ChatManager"/>
+		<!-- <hook file="managers/CrimeNetManager.lua" source_file="lib/managers/CrimeNetManager"/> -->
+		
         <hook file="managers/hud/hudassaultcorner.lua" source_file="lib/managers/hud/hudassaultcorner"/>
-        <hook file="managers/hud/HUDObjectives.lua" source_file="lib/managers/hud/HUDObjectives"/>
         <hook file="managers/hud/HUDTemp.lua" source_file="lib/managers/hud/HUDTemp"/>
-        <hook file="managers/hud/HUDBlackScreen.lua" source_file="lib/managers/hud/HUDBlackScreen"/>
         <hook file="managers/hud/HUDTeammate.lua" source_file="lib/managers/hud/HUDTeammate"/>
-		<hook file="managers/hud/HUDInteraction.lua" source_file="lib/managers/hud/HUDInteraction"/>
 		<hook file="managers/hud/HUDChat.lua" source_file="lib/managers/hud/HUDChat"/>
 		<hook file="managers/hud/HUDHeistTimer.lua" source_file="lib/managers/hud/HUDHeistTimer"/>
 		<hook file="managers/hud/HUDHint.lua" source_file="lib/managers/hud/HUDHint"/>
@@ -28,31 +28,23 @@
 		<hook file="managers/hud/HUDPresenter.lua" source_file="lib/managers/hud/HUDPresenter"/>
 		<hook file="managers/hud/HUDSuspicion.lua" source_file="lib/managers/hud/HUDSuspicion"/>
 		<hook file="managers/hud/hudplayercustody.lua" source_file="lib/managers/hud/HUDPlayerCustody"/>
-		<hook file="managers/hud/HUDStageEndScreen.lua" source_file="lib/managers/hud/HUDStageEndScreen"/>
-		<hook file="managers/hud/HUDMissionBriefing.lua" source_file="lib/managers/hud/HUDMissionBriefing"/>
-		<hook file="managers/menu/CircleGUIObject.lua" source_file="lib/managers/menu/CircleGUIObject"/>
-		<hook file="managers/menu/StageEndScreenGUI.lua" source_file="lib/managers/menu/StageEndScreenGUI"/>
-		<hook file="managers/menu/MissionBriefingGUI.lua" source_file="lib/managers/menu/MissionBriefingGUI"/>
+		<!-- <hook file="managers/hud/HUDStageEndScreen.lua" source_file="lib/managers/hud/HUDStageEndScreen"/>
+		<hook file="managers/hud/HUDMissionBriefing.lua" source_file="lib/managers/hud/HUDMissionBriefing"/> -->
+		<hook file="managers/hud/HUDArmorFix.lua" source_file="lib/managers/hud/HUDTeammate"/>
+		
+		<hook source_file="lib/managers/menu/menucomponentmanager" file="managers/menu/bannerless.lua"/>
+		<hook source_file="lib/managers/menu/menucomponentmanager" file="managers/menu/menucomponentmanager.lua"/>
+		<hook source_file="lib/managers/menu/menurenderer" file="managers/menu/menurenderer.lua"/>
+		<hook source_file="lib/managers/menu/ingamecontractgui" file="managers/menu/ingamecontractgui.lua"/>
+		<hook source_file="lib/managers/menu/renderers/menunodecrimenetgui" file="managers/menu/menunodecrimenetgui.lua"/>
 		<hook file="managers/menu/MenuBackdropGUI.lua" source_file="lib/managers/menu/MenuBackdropGUI"/>
 		<hook file="managers/menu/MenuPauseRenderer.lua" source_file="lib/managers/menu/MenuPauseRenderer"/>
 		<hook file="managers/menu/playerinventorygui.lua" source_file="lib/managers/menu/playerinventorygui"/>
 		<hook file="managers/menu/renderers/menunodejukeboxgui.lua" source_file="lib/managers/menu/renderers/menunodejukeboxgui"/>
-		<hook file="managers/menu/PlayerProfileGUIObject.lua" source_file="lib/managers/menu/playerprofileguiobject"/>
-		<hook file="managers/menu/renderers/MenuNodeCrimeNetGUI.lua" source_file="lib/managers/menu/renderers/menunodecrimenetgui"/>
-		<hook file="managers/CrimeNetManager.lua" source_file="lib/managers/CrimeNetManager"/>
-		<hook file="managers/menu/MenuComponentManager.lua" source_file="lib/managers/menu/menucomponentmanager"/>
-		<hook file="managers/menu/NewsFeedGUI.lua" source_file="lib/managers/menu/NewsFeedGUI"/>
-		<hook file="managers/UserManager.lua" source_file="lib/managers/usermanager"/>
-		<hook file="managers/musicmanager.lua" source_file="lib/managers/musicmanager"/>
-		<hook file="managers/hud/HUDArmorFix.lua" source_file="lib/managers/hud/HUDTeammate"/>
-
-		<hook file="tweak_data/assetstweakdata.lua" source_file="lib/tweak_data/assetstweakdata"/>
-		<hook file="tweak_data/interactiontweakdata.lua" source_file="lib/tweak_data/interactiontweakdata"/>
-		<hook file="managers/menumanagerpd2.lua" source_file="lib/managers/menumanagerpd2"/>
+		
 		<hook file="managers/menumanager.lua" source_file="lib/managers/menumanager"/>
 		<hook file="managers/menu/menunodegui.lua" source_file="lib/managers/menu/menunodegui"/>
 		<hook file="loc/coreloc.lua" source_file="lib/managers/localizationmanager"/>
-		<hook file="CoreScriptData.lua" source_file="core/lib/managers/coresequencemanager"/>
     </Hooks>
     <!-- <Localization directory="loc" default="english.json">
     </Localization> -->

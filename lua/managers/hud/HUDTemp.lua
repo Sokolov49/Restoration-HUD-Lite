@@ -1,9 +1,5 @@
-if _G.IS_VR then
-	return
-end
-if restoration.Options:GetValue("HUD/MainHUD") then
+
 	RestorationCoreHooks:Post(HUDTemp, "init", function(self)
-		if restoration.Options:GetValue("HUD/Bag") then
 			self._bg_box:set_alpha(0)
 			self._bg_box:hide()
 			self._bg_box:set_size(0,0)
@@ -14,34 +10,29 @@ if restoration.Options:GetValue("HUD/MainHUD") then
 				font = "fonts/font_medium_noshadow_mf",
 				layer = 2
 			})
-			local carry_bag = bag_panel:bitmap({name = "carry_bag", texture_rect = {28, 52, 201, 161}, layer = 1, halign = "scale", valign = "scale", texture = "guis/textures/restoration/icon_carrybag"})
+			local carry_bag = bag_panel:bitmap({name = "carry_bag", texture_rect = {28, 52, 201, 161}, layer = 1, halign = "scale", valign = "scale", texture = "guis/textures/pd2/icon_carrybag"})
 			carry_bag:set_size(carry_bag:w() * 0.5, carry_bag:h() * 0.5)
 			bag_panel:set_size(carry_bag:size())
 			carry_bag:set_size(bag_panel:size())
 			bag_panel:set_bottom(self._temp_panel:h() - 152)
-			self._stamina_panel:set_alpha(1)
+			self._stamina_panel:set_alpha(0)
 			self._bag_panel_w, self._bag_panel_h = bag_panel:size()
-		end
 		RestorationCoreCallbacks:AddValueChangedFunc(callback(self, self, "RestorationValueChanged"))
 		self:RestorationValueChanged()
 	end)
 
 	function HUDTemp:RestorationValueChanged()
-		self._stamina_panel:set_alpha(restoration.Options:GetValue("HUD/StaminaIndicator") and 1 or 0)
-		local stamina_color = restoration.Options:GetValue("HUD/Colors/Stamina")
+		self._stamina_panel:set_alpha(0)
+		local stamina_color = Color(0.6, 0.6, 0.6)
 		self._stamina_panel:child("stamina_bar_bg"):set_color(stamina_color)
 		self._stamina_panel:child("low_stamina_bar"):set_color(stamina_color)
 		self._stamina_panel:child("stamina_bar"):set_color(stamina_color)
-		self._stamina_panel:child("stamina_threshold"):set_color(restoration.Options:GetValue("HUD/Colors/StaminaThreshold"))
+		self._stamina_panel:child("stamina_threshold"):set_color(Color.white)
 		local bag_panel = self._temp_panel:child("bag_panel")
 		if alive(bag_panel:child("carry_bag")) then
-			bag_panel:child("carry_bag"):set_color(restoration.Options:GetValue("HUD/Colors/BagBitmap"))
-			bag_panel:child("bag_text"):set_color(restoration.Options:GetValue("HUD/Colors/BagText"))
+			bag_panel:child("carry_bag"):set_color(Color.white)
+			bag_panel:child("bag_text"):set_color(Color.black)
 		end
-	end
-
-	if not restoration.Options:GetValue("HUD/Bag") then
-		return
 	end
 
 	function HUDTemp:show_carry_bag(carry_id, value)
@@ -74,14 +65,7 @@ if restoration.Options:GetValue("HUD/MainHUD") then
 		local ecx = self._temp_panel:w() - w / 2
 		local scy = self._temp_panel:h() / 2
 		local ecy = (self._temp_panel:h() - 152) - self._bag_panel_h / 2
-		if restoration.Options:GetValue("HUD/Extra/LowerBag") then
-			scy = ecy
-		end
-		if pdth_hud and pdth_hud.Options:GetValue("HUD/MainHud") then -- some love for Bushy
-			local const = pdth_hud.constants
-			ecx = self._temp_panel:w() - ((w / 2) + (const.main_equipment_size *  1.5) + const.main_bag_gap)
-			ecy = self._temp_panel:h() - ((h / 2) + (const.main_equipment_size * const.main_equipment_y_offset_multiplier))
-		end
+		scy = ecy
 		local bottom = bag_panel:bottom()
 		local center_y = bag_panel:center_y()
 		local scale = 2
@@ -126,4 +110,3 @@ if restoration.Options:GetValue("HUD/MainHUD") then
 	function HUDTemp:set_throw_bag_text()
 		self._temp_panel:child("throw_instruction"):set_text(utf8.to_upper(managers.localization:text("hud_instruct_throw_bag", {BTN_USE_ITEM = managers.localization:btn_macro("use_item")})))
 	end
-end

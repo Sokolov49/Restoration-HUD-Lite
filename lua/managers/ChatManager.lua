@@ -1,5 +1,3 @@
-if not restoration.Options:GetValue("HUD/UI/Loadouts") then return end
-
 ChatGui.line_height = 22
 function ChatGui:init(ws)
 	self._ws = ws

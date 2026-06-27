@@ -1,5 +1,3 @@
-if not restoration.Options:GetValue("HUD/UI/Crimenet") then return end
-
 local function round_gui_object(object)
     if alive(object) then
         local x, y = object:world_position()

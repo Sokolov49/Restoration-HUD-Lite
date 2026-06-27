@@ -1,0 +1,23 @@
+<table>
+    <menu search="menu;id='start_menu'">
+        <node search="node;name='main'">
+			<item search="item;name='crimenet'" font_size="34" font="fonts/font_medium_shadow_mf"/>
+			<item search="item;name='crimenet_offline'" font_size="34" font="fonts/font_medium_shadow_mf"/>
+			
+			<item search="item;name='story_missions'" font_size="32" font="fonts/font_medium_shadow_mf"/>
+			<item search="item;name='inventory'" font_size="32" font="fonts/font_medium_shadow_mf"/>
+			<item search="item;name='achievements'" font_size="32" font="fonts/font_medium_shadow_mf"/>
+			
+			<item search="item;name='steam_inventory'" font_size="32" font="fonts/font_medium_shadow_mf"/>
+			<item search="item;name='fbi_files'" font_size="32" font="fonts/font_medium_shadow_mf"/>
+			<item search="item;name='gamehub'" font_size="32" font="fonts/font_medium_shadow_mf"/>
+			<item search="item;name='movie_theater'" font_size="32" font="fonts/font_medium_shadow_mf"/>
+			<item search="item;name='movie_the_end'" font_size="32" font="fonts/font_medium_shadow_mf"/>
+			<item search="item;name='options'" font_size="32" font="fonts/font_medium_shadow_mf"/>
+			<item search="item;name='ingame_manual'" font_size="32" font="fonts/font_medium_shadow_mf"/>
+			<item search="item;name='account_picker'" font_size="32" font="fonts/font_medium_shadow_mf"/>
+			<item search="item;name='option_help'" font_size="32" font="fonts/font_medium_shadow_mf"/>
+			<item search="item;name='quit'" font_size="32" font="fonts/font_medium_shadow_mf"/>
+        </node>
+    </menu>
+</table>

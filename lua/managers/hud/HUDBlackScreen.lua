@@ -1,7 +1,3 @@
-if not restoration.Options:GetValue("HUD/UI/BlackScreen") then
-	return
-end
-
 RestorationCoreHooks:Post(HUDBlackScreen, "init", function(self)
 	self._blackscreen_panel:set_layer(0)
 	self._blackscreen_panel:child("mid_text"):set_center_y(self._blackscreen_panel:h() / 3)
@@ -73,7 +69,7 @@ function HUDBlackScreen:_set_job_data()
 
 	for i = 1, managers.job:current_difficulty_stars(), 1 do
 		local difficulty_name = tweak_data.difficulties[i + 2]
-		local texture = "guis/textures/restoration/risklevel_blackscreen"
+		local texture = "guis/textures/pd2/risklevel_blackscreen"
 		last_risk_level = risk_panel:bitmap({
 			texture = texture,
 			color = tweak_data.screen_color_red

@@ -1,84 +1,4 @@
-restoration.textures = {}
-
-if not CCGCore then
-	--E3 PAYDAY+
-	table.insert(tweak_data.color_grading,
-		{
-			value = "color_plus",
-			text_id = "menu_color_plus"
-		}
-	)
-	--E3 BHD
-	table.insert(tweak_data.color_grading,
-		{
-			value = "color_force",
-			text_id = "menu_color_force"
-		}
-	)
-	--E3 Nice
-	table.insert(tweak_data.color_grading,
-		{
-			value = "color_e3nice",
-			text_id = "menu_color_e3nice"
-		}
-	)
-	--Unused vanilla color grading
-	table.insert(tweak_data.color_grading,
-		{
-			value = "color_subzero",
-			text_id = "menu_color_subzero"
-		}
-	)
-end
-
---OVERKILL had this for RVD1 for some reason, but it's just inverted default grading?
-table.insert(tweak_data.color_grading,
-	{
-		value = "color_rvd1",
-		text_id = "menu_color_rvd1"
-	}
-)
-
-if restoration.Options:GetValue("HUD/UI/DifficultyMarkers") then
-tweak_data.hud_icons.risk_swat = {
-		texture = "guis/textures/restoration/hud_difficultymarkers",
-		texture_rect = {
-			0,
-			64,
-			49,
-			32
-		}
-	}
-tweak_data.hud_icons.risk_fbi = {
-		texture = "guis/textures/restoration/hud_difficultymarkers",
-		texture_rect = {
-			49,
-			64,
-			35,
-			32
-		}
-	}
-tweak_data.hud_icons.risk_death_squad = {
-		texture = "guis/textures/restoration/hud_difficultymarkers",
-		texture_rect = {
-			85,
-			64,
-			31,
-			32
-		}
-	}
-tweak_data.hud_icons.risk_murder_squad = {
-		texture = "guis/textures/restoration/hud_difficultymarkers",
-		texture_rect = {
-			121,
-			64,
-			60,
-			32
-		}
-	}
-end
-
-if restoration:all_enabled("HUD/MainHUD", "HUD/AssaultPanel") then
+if not tweak_data then return end
 
 tweak_data.hud_icons.interaction_trade = {
 		texture = "guis/textures/restoration/hud_icons",
@@ -89,68 +9,7 @@ tweak_data.hud_icons.interaction_trade = {
 			48
 		}
 	}
-end
 
-if restoration:all_enabled("HUD/MainHUD", "HUD/Teammate") then
---[[tweak_data.hud_icons.equipment_cable_ties = {
-		texture = "guis/textures/restoration/hud_icons",
-		texture_rect = {
-			384,
-			96,
-			48,
-			48
-		}
-	}
-
-tweak_data.hud_icons.equipment_ammo_bag = {
-		texture = "guis/textures/restoration/hud_icons",
-		texture_rect = {
-			48,
-			96,
-			48,
-			48
-		}
-	}
-
-tweak_data.hud_icons.equipment_doctor_bag = {
-	texture = "guis/textures/restoration/hud_icons",
-	texture_rect = {
-		96,
-		96,
-		48,
-		48
-	}
-}
-tweak_data.hud_icons.equipment_sentry = {
-		texture = "guis/textures/restoration/hud_icons",
-		texture_rect = {
-			320,
-			288,
-			48,
-			48
-		}
-	}
-tweak_data.hud_icons.equipment_trip_mine = {
-		texture = "guis/textures/restoration/hud_icons",
-		texture_rect = {
-			0,
-			96,
-			48,
-			48
-		}
-	}
-
-tweak_data.hud_icons.equipment_ecm_jammer = {
-		texture = "guis/textures/restoration/hud_icons",
-		texture_rect = {
-			272,
-			288,
-			48,
-			48
-		}
-	}]]
-
----------------- equipment icons --------------
 
 tweak_data.hud_icons.frag_grenade = {
 		texture = "guis/textures/restoration/throwables",
@@ -226,6 +85,12 @@ tweak_data.hud_icons.equipment_saw = {
 		}
 	}
 
+tweak_data.hud.revive_colors_resmod = {
+	restoration.Options:GetValue("HUD/Colors/DownsZero"),
+	restoration.Options:GetValue("HUD/Colors/DownsOne"),
+	restoration.Options:GetValue("HUD/Colors/DownsTwo"),
+	restoration.Options:GetValue("HUD/Colors/DownsThreePlus")
+}
 
 local d_color = Color( 0.5, 0.5, 0.5, 0.5 ) -- Color( 0.75, 1, 0.4, 0.0 )
 
@@ -247,96 +112,7 @@ for k, icon in pairs(tweak_data.hud_icons) do
         end
 end
 
-end
-
-
-if not tweak_data then return end
-if restoration.Options:GetValue("HUD/UI/PeerColors") and not _G.BigLobbyGlobals then
---Alpha Peer Colors
-	local orange = Vector3( 224, 109, 81 )/255
-	local green = Vector3( 102, 204, 51 )/255
-	local brown = Vector3( 98, 70, 43 )/255
-	local blue = Vector3( 104, 133, 161 )/255
-	local team_ai = Vector3( 0.2, 0.8, 1 ) --this has multiple different values in the code, but they're all a variety of green or yellow.  add those as a multichoice later on, but not important since they clash.
-
-	tweak_data.peer_vector_colors = { blue, orange, green, brown, team_ai }
-    tweak_data.peer_colors = { "mrblue", "mrorange", "mrgreen", "mrbrown", "mrai" }
-
-	tweak_data.chat_colors = {
-			Color( tweak_data.peer_vector_colors[1]:unpack() ),
-			Color( tweak_data.peer_vector_colors[2]:unpack() ),
-			Color( tweak_data.peer_vector_colors[3]:unpack() ),
-			Color( tweak_data.peer_vector_colors[4]:unpack() ),
-			Color( tweak_data.peer_vector_colors[5]:unpack() )
-    }
-	tweak_data.preplanning_peer_colors = {
-			Color( tweak_data.peer_vector_colors[1]:unpack() ),
-			Color( tweak_data.peer_vector_colors[2]:unpack() ),
-			Color( tweak_data.peer_vector_colors[3]:unpack() ),
-			Color( tweak_data.peer_vector_colors[4]:unpack() )
-    }
-end
---Jackal codex entry
-table.insert (tweak_data.gui.crime_net.codex,
-
-		{
-			id = "contacts",
-			name_id = "menu_contacts_shatter",
-			{
-				id = "shatter",
-				name_id = "heist_contact_shatter",
-				{
-					desc_id = "heist_contact_shatter_description",
-					videos = {"shatter1"}
-				},
-				id = "shatter",
-				name_id = "heist_contact_shatter",
-				{
-					desc_id = "heist_contact_raze_description",
-					videos = {"shatter1"}
-				},
-				id = "shatter",
-				name_id = "heist_contact_shatter",
-				{
-					desc_id = "heist_contact_jackal_description",
-					videos = {"shatter1"}
-				}
-			},
-			{
-				id = "akashic",
-				name_id = "heist_contact_akashic",
-				{
-					desc_id = "heist_contact_akashic_description",
-					videos = {"shatter1"}
-				}
-			}
-
-		} )
-
---Jackal & Raze narrative entry
-tweak_data.narrative.contacts.shatter				= {}
-tweak_data.narrative.contacts.shatter.name_id					= "heist_contact_shatter"
-tweak_data.narrative.contacts.shatter.description_id	= "heist_contact_shatter_description"
-tweak_data.narrative.contacts.shatter.image		= "guis/textures/pd2/crimenet_portrait_interupt"
-tweak_data.narrative.contacts.shatter.package = "packages/contact_interupt"
-tweak_data.narrative.contacts.shatter.assets_gui = Idstring( "guis/mission_briefing/preload_contact_interupt" )
-
---Nicolas narrative entry
-tweak_data.narrative.contacts.akashic				= {}
-tweak_data.narrative.contacts.akashic.name_id					= "heist_contact_akashic"
-tweak_data.narrative.contacts.akashic.description_id	= "heist_contact_akashic_description"
-tweak_data.narrative.contacts.akashic.image		= "guis/textures/pd2/crimenet_portrait_hector"
-tweak_data.narrative.contacts.akashic.package = "packages/contact_hector"
-tweak_data.narrative.contacts.akashic.assets_gui = Idstring( "guis/mission_briefing/preload_contact_hector" )
-
-tweak_data.hud.revive_colors_resmod = {
-	restoration.Options:GetValue("HUD/Colors/DownsZero"),
-	restoration.Options:GetValue("HUD/Colors/DownsOne"),
-	restoration.Options:GetValue("HUD/Colors/DownsTwo"),
-	restoration.Options:GetValue("HUD/Colors/DownsThreePlus")
-}
 --District descriptions
-if restoration.Options:GetValue("HUD/UI/District") then
 	tweak_data.gui.crime_net.regions = {
 		{closed=true, text={title_id="cn_menu_georgetown_title", sub_id="cn_menu_georgetown_sub", x=348, y=310}, {-10, 270, 293, 252, 271, 337, 341, 372, 372, 475, 475, 491, 491, 504, 503, 524, 536, 536, 542, 542, 555, 555, 598, 598, 638, 638, 657, 688, 686, 691, 701, 698, 687, 650, 634, 602, 609, 580, 576, 576, 567, 559, 558, 542, 543, 512, 512, 503, 381, 377, 348, 315, 315, 290, 290, 259, 259, 237, 237, 261, 261, 257, 224, 221, 187, 182, 163, 163, 147, 147, 133, 133, 102, 102, -10},{-10, -10, 28, 73, 122, 123, 132, 141, 145, 172, 216, 215, 180, 179, 229, 228, 244, 253, 253, 248, 247, 241, 241, 219, 219, 209, 208, 234, 241, 242, 262, 270, 277, 276, 279, 296, 300, 362, 361, 408, 416, 417, 430, 430, 477, 477, 514, 523, 523, 514, 514, 501, 493, 484, 469, 469, 465, 465, 439, 440, 434, 430, 429, 433, 433, 438, 438, 423, 423, 435, 435, 423, 423, 412, 412}},
 
@@ -357,4 +133,3 @@ if restoration.Options:GetValue("HUD/UI/District") then
 		{closed=false, text={title_id="cn_menu_downtown_title", sub_id="cn_menu_downtown_sub", x=1469, y=720}, {1200, 1206, 1206, 1201, 1201, 1251, 1251, 1201, 1201, 1205, 1254, 1254, 1285, 1285, 1308, 1308, 1372, 1372, 1388, 1388, 1411, 1411, 1462, 1462, 1523, 1523, 1538, 1538, 1528, 1527, 1709, 1709, 1760, 1880, 1880, 2047}, {665, 669, 688, 688, 741, 760, 787, 787, 898, 902, 902, 896, 896, 902, 902, 896, 896, 903, 903, 896, 896, 898, 898, 889, 889, 901, 901, 920, 920, 953, 953, 902, 902, 798, 609, 609}},
 
 	}
-end

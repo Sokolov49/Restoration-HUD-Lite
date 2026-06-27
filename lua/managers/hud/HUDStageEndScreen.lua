@@ -7,7 +7,7 @@ local function make_fine_text(text)
 
 	return x, y, w, h
 end
-if restoration.Options:GetValue("HUD/UI/Loadouts") then
+
 function HUDPackageUnlockedItem:init(panel, row, params, hud_stage_end_screen)
 	local num_unlocks = math.clamp(params.unlocks, HUDPackageUnlockedItem.MIN_DISPLAYED, HUDPackageUnlockedItem.MAX_DISPLAYED)
 	self._panel = panel:panel({
@@ -135,7 +135,7 @@ function HUDPackageUnlockedItem:init(panel, row, params, hud_stage_end_screen)
 		end
 	elseif ghost_bonus then
 		local on_last_stage = managers.job:on_last_stage()
-		bitmap_texture = "guis/textures/restoration/stealth_bonus"
+		bitmap_texture = "guis/textures/pd2/stealth_bonus"
 		local string_id = on_last_stage and "menu_es_ghost_bonus_job" or "menu_es_ghost_bonus_day"
 		text_string = managers.localization:to_upper_text(string_id, {
 			bonus = ghost_bonus
@@ -393,7 +393,7 @@ function HUDStageEndScreen:init(hud, workspace)
 	level_progress_text:set_size(lw, lh)
 
 	local coins_bg_circle = self._coins_backpanel:bitmap({
-		texture = "guis/textures/restoration/exp_ring",
+		texture = "guis/textures/pd2/exp_ring",
 		name = "bg_progress_circle",
 		alpha = 0.6,
 		blend_mode = "normal",
@@ -403,7 +403,7 @@ function HUDStageEndScreen:init(hud, workspace)
 		color = Color.black
 	})
 	self._coins_circle = self._coins_backpanel:bitmap({
-		texture = "guis/textures/restoration/exp_ring",
+		texture = "guis/textures/pd2/exp_ring",
 		name = "progress_circle",
 		blend_mode = "add",
 		render_template = "VertexColorTexturedRadial",
@@ -463,7 +463,7 @@ function HUDStageEndScreen:init(hud, workspace)
 	level_progress_text:set_size(lw, lh)
 	local lp_bg_circle = self._lp_backpanel:bitmap({
 		name = "bg_progress_circle",
-		texture = "guis/textures/restoration/exp_ring",
+		texture = "guis/textures/pd2/exp_ring",
 		h = self._lp_backpanel:h() - content_font_size,
 		w = self._lp_backpanel:h() - content_font_size,
 		y = content_font_size,
@@ -485,7 +485,7 @@ function HUDStageEndScreen:init(hud, workspace)
 	})	
 	self._lp_circle = self._lp_backpanel:bitmap({
 		name = "progress_circle",
-		texture = "guis/textures/restoration/exp_ring",
+		texture = "guis/textures/pd2/exp_ring",
 		h = self._lp_backpanel:h() - content_font_size,
 		w = self._lp_backpanel:h() - content_font_size,
 		y = content_font_size,
@@ -864,7 +864,7 @@ function HUDStageEndScreen:level_up(level)
 	managers.menu_component:post_event("stinger_levelup")
 
 	local ding_circle = self._lp_backpanel:bitmap({
-		texture = "guis/textures/restoration/exp_ring",
+		texture = "guis/textures/pd2/exp_ring",
 		rotation = 360,
 		blend_mode = "add",
 		layer = 0,
@@ -942,8 +942,6 @@ function HUDStageEndScreen:set_statistics( criminals_completed, success )
 	
 	total_completion_bonus:set_text( managers.experience:cash_string( 0 ) .. xp_postfix )
 	]]
-end
-
 end
 
 --[[
