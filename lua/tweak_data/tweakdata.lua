@@ -99,20 +99,14 @@ local conversion = {
         ["guis/textures/pd2/equipment"] = "guis/textures/restoration/equipment",
         ["guis/textures/hud_icons"] = "guis/textures/restoration/hud_icons",
     }
-
-	local conversion2 = {
-        ["guis/textures/pd2/pd2_waypoints"] = "guis/textures/restoration/pd2_waypoints",
-    }
 for k, icon in pairs(tweak_data.hud_icons) do
-        if conversion[icon.texture] then
-            icon.texture = conversion[icon.texture]
-        end
-		 if conversion2[icon.texture] and restoration.Options:GetValue("HUD/Waypoints") then
-            icon.texture = conversion2[icon.texture]
-        end
+    if conversion[icon.texture] then
+        icon.texture = conversion[icon.texture]
+    end
 end
 
 --District descriptions
+
 	tweak_data.gui.crime_net.regions = {
 		{closed=true, text={title_id="cn_menu_georgetown_title", sub_id="cn_menu_georgetown_sub", x=348, y=310}, {-10, 270, 293, 252, 271, 337, 341, 372, 372, 475, 475, 491, 491, 504, 503, 524, 536, 536, 542, 542, 555, 555, 598, 598, 638, 638, 657, 688, 686, 691, 701, 698, 687, 650, 634, 602, 609, 580, 576, 576, 567, 559, 558, 542, 543, 512, 512, 503, 381, 377, 348, 315, 315, 290, 290, 259, 259, 237, 237, 261, 261, 257, 224, 221, 187, 182, 163, 163, 147, 147, 133, 133, 102, 102, -10},{-10, -10, 28, 73, 122, 123, 132, 141, 145, 172, 216, 215, 180, 179, 229, 228, 244, 253, 253, 248, 247, 241, 241, 219, 219, 209, 208, 234, 241, 242, 262, 270, 277, 276, 279, 296, 300, 362, 361, 408, 416, 417, 430, 430, 477, 477, 514, 523, 523, 514, 514, 501, 493, 484, 469, 469, 465, 465, 439, 440, 434, 430, 429, 433, 433, 438, 438, 423, 423, 435, 435, 423, 423, 412, 412}},
 
@@ -131,5 +125,4 @@ end
 
 		{closed=false, text={title_id="cn_menu_shaw_title", sub_id="cn_menu_shaw_sub", x=1426, y=310}, {2047, 1972, 1879, 1879, 1735, 1677, 1677, 1683, 1625, 1619, 1624, 1620, 1641, 1641, 1572, 1571, 1558, 1558, 1547, 1547, 1523, 1523, 1462, 1462, 1450, 1450, 1422, 1402, 1402, 1356, 1356, 1316, 1316, 1308, 1308, 1279, 1279, 1245, 1245, 1200, 1200, 1039}, {278, 311, 311, 352, 416, 416, 429, 440, 468, 461, 458, 451, 442, 420, 420, 470, 470, 467, 467, 469, 469, 518, 518, 532, 532, 547, 560, 560, 570, 569, 591, 610, 604, 604, 614, 628, 614, 614, 644, 665, 608, 608}},
 		{closed=false, text={title_id="cn_menu_downtown_title", sub_id="cn_menu_downtown_sub", x=1469, y=720}, {1200, 1206, 1206, 1201, 1201, 1251, 1251, 1201, 1201, 1205, 1254, 1254, 1285, 1285, 1308, 1308, 1372, 1372, 1388, 1388, 1411, 1411, 1462, 1462, 1523, 1523, 1538, 1538, 1528, 1527, 1709, 1709, 1760, 1880, 1880, 2047}, {665, 669, 688, 688, 741, 760, 787, 787, 898, 902, 902, 896, 896, 902, 902, 896, 896, 903, 903, 896, 896, 898, 898, 889, 889, 901, 901, 920, 920, 953, 953, 902, 902, 798, 609, 609}},
-
 	}

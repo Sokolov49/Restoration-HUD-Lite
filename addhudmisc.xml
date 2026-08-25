@@ -6,7 +6,7 @@
 	<texture path="guis/textures/restoration/hud_pickups"/>
 	<texture path="guis/textures/restoration/throwables"/>
 	<texture path="guis/textures/restoration/equipment"/>
-	<texture path="guis/textures/restoration/objective"/>
+<!--<texture path="guis/textures/restoration/objective"/>-->
 	<texture path="guis/textures/restoration/hud_radial_rim_base_fix"/>
 	<texture path="guis/textures/restoration/hud_radialbg"/>
 	<texture path="guis/textures/restoration/hud_radialbg_base_fix"/>
@@ -16,7 +16,7 @@
 	<merged_font path="fonts/font_small_shadow_mf" force="true"/>
 	<merged_font path="fonts/font_medium_noshadow_mf" force="true"/> -->
 	
-	<!-- Health Circle++ Fix -->
-	<texture path="guis/textures/pd2/hud_health_fake" force="true"/>
+	<!-- Health Circle++ Fix
+	<texture path="guis/textures/pd2/hud_health_fake" force="true"/> -->
 
 </table>

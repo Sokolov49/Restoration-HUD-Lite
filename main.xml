@@ -13,20 +13,19 @@
 		<!-- <hook file="tweak_data/tweakdata.lua" source_file="lib/tweak_data/guitweakdata"/> -->
 		
 		<hook file="managers/HUDManager.lua" source_file="lib/managers/HUDManager"/>
-		<hook file="managers/HUDManagerpd2.lua" source_file="lib/managers/HUDManagerpd2"/>
 		<hook file="managers/GUIDataManager.lua" source_file="core/lib/managers/coreguidatamanager"/>
 		<hook file="managers/ChatManager.lua" source_file="lib/managers/ChatManager"/>
 		<!-- <hook file="managers/CrimeNetManager.lua" source_file="lib/managers/CrimeNetManager"/> -->
 		
-        <hook file="managers/hud/hudassaultcorner.lua" source_file="lib/managers/hud/hudassaultcorner"/>
-        <hook file="managers/hud/HUDTemp.lua" source_file="lib/managers/hud/HUDTemp"/>
+        <!--<hook file="managers/hud/hudassaultcorner.lua" source_file="lib/managers/hud/hudassaultcorner"/> -->
+        <!--<hook file="managers/hud/HUDTemp.lua" source_file="lib/managers/hud/HUDTemp"/>-->
         <hook file="managers/hud/HUDTeammate.lua" source_file="lib/managers/hud/HUDTeammate"/>
 		<hook file="managers/hud/HUDChat.lua" source_file="lib/managers/hud/HUDChat"/>
 		<hook file="managers/hud/HUDHeistTimer.lua" source_file="lib/managers/hud/HUDHeistTimer"/>
 		<hook file="managers/hud/HUDHint.lua" source_file="lib/managers/hud/HUDHint"/>
 		<hook file="managers/hud/HUDPlayerDowned.lua" source_file="lib/managers/hud/HUDPlayerDowned"/>
 		<hook file="managers/hud/HUDPresenter.lua" source_file="lib/managers/hud/HUDPresenter"/>
-		<hook file="managers/hud/HUDSuspicion.lua" source_file="lib/managers/hud/HUDSuspicion"/>
+		<!-- <hook file="managers/hud/HUDSuspicion.lua" source_file="lib/managers/hud/HUDSuspicion"/> -->
 		<hook file="managers/hud/hudplayercustody.lua" source_file="lib/managers/hud/HUDPlayerCustody"/>
 		<!-- <hook file="managers/hud/HUDStageEndScreen.lua" source_file="lib/managers/hud/HUDStageEndScreen"/>
 		<hook file="managers/hud/HUDMissionBriefing.lua" source_file="lib/managers/hud/HUDMissionBriefing"/> -->
