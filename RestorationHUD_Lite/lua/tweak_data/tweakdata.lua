@@ -1,7 +1,7 @@
 if not tweak_data then return end
 
 tweak_data.hud_icons.interaction_trade = {
-		texture = "guis/textures/restoration/hud_icons",
+		texture = "guis/textures/hud_icons",
 		texture_rect = {
 			432,
 			144,
@@ -9,8 +9,6 @@ tweak_data.hud_icons.interaction_trade = {
 			48
 		}
 	}
-
-
 tweak_data.hud_icons.frag_grenade = {
 		texture = "guis/textures/restoration/throwables",
 		texture_rect = {
@@ -74,7 +72,6 @@ tweak_data.hud_icons.throwing_axe = {
 			32
 		}
 	}
-
 tweak_data.hud_icons.equipment_saw = {
 		texture = "guis/textures/restoration/hud_pickups",
 		texture_rect = {
@@ -86,10 +83,10 @@ tweak_data.hud_icons.equipment_saw = {
 	}
 
 tweak_data.hud.revive_colors_resmod = {
-	restoration.Options:GetValue("HUD/Colors/DownsZero"),
-	restoration.Options:GetValue("HUD/Colors/DownsOne"),
-	restoration.Options:GetValue("HUD/Colors/DownsTwo"),
-	restoration.Options:GetValue("HUD/Colors/DownsThreePlus")
+	Color.red,
+	Color(1, 0.37, 0),
+	Color.yellow,
+	Color.white
 }
 
 local d_color = Color( 0.5, 0.5, 0.5, 0.5 ) -- Color( 0.75, 1, 0.4, 0.0 )

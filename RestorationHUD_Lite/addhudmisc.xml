@@ -7,10 +7,13 @@
 	<texture path="guis/textures/restoration/throwables"/>
 	<texture path="guis/textures/restoration/equipment"/>
 <!--<texture path="guis/textures/restoration/objective"/>-->
-	<texture path="guis/textures/restoration/hud_radial_rim_base_fix"/>
 	<texture path="guis/textures/restoration/hud_radialbg"/>
-	<texture path="guis/textures/restoration/hud_radialbg_base_fix"/>
-	<gui path="guis/mask_off_hud" force="true"/>
+	<texture path="guis/textures/restoration/hud_absorb_stack_fg"/>
+	<texture path="guis/textures/restoration/hud_absorb_stack_bg"/>
+	<texture path="guis/textures/restoration/hud_absorb_shield"/>
+	<texture path="guis/textures/restoration/hud_absorb_health"/>
+	<texture path="guis/textures/loading/loading_bg"/>
+	<texture path="guis/textures/loading/loading_foreground"/>
 	<font path="fonts/font_medium_shadow" force="true"/>
 	<!-- <merged_font path="fonts/font_medium_shadow_mf" force="true"/>
 	<merged_font path="fonts/font_small_shadow_mf" force="true"/>

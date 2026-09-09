@@ -1,7 +1,3 @@
-if not restoration:all_enabled("HUD/MainHUD", "HUD/Presenter") then
-	return
-end
-
 function HUDPresenter:init(hud)
 	self._hud_panel = hud.panel
 	if self._hud_panel:child("present_panel") then

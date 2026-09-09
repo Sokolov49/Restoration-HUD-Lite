@@ -1,11 +1,3 @@
-local maps = {
-    greenharvest_stage1 = true,
-    escape_overpass_ghrv = true,
-    escape_garage_ghrv = true,
-	highrise = true,
-	nomercy = true
-}
-
 function HUDMissionBriefing:init(hud, workspace)
 	self._backdrop = MenuBackdropGUI:new(workspace)
 	self._backdrop:create_black_borders()
@@ -190,6 +182,7 @@ function HUDMissionBriefing:init(hud, workspace)
 	if pattern then
 		self._backdrop:set_pattern(pattern, 0.1, "add")
 	end
+	
 	local padding_y = 70
 	self._paygrade_panel = self._background_layer_one:panel({
 		h = 70,
@@ -708,113 +701,4 @@ function HUDMissionBriefing:remove_player_slot_by_peer_id(peer, reason)
 	slot:child("infamy"):set_visible(false)
 	slot:child("detection"):set_visible(false)
 	slot:child("detection_value"):set_visible(slot:child("detection"):visible())
-end
-
-function HUDMissionBriefing:set_contact_info(contact, interupt)
-    local set_image = {
-        bain = "guis/textures/restoration/mission_briefing/bain",
-        hoxton = "guis/textures/restoration/mission_briefing/hoxton",
-        classic = "guis/textures/restoration/mission_briefing/classic",
-        hector = "guis/textures/restoration/mission_briefing/hector",
-        interupt = "guis/textures/pd2/mission_briefing/interupt/contact",
-        jimmy = "guis/textures/restoration/mission_briefing/jimmy",
-        locke = "guis/textures/restoration/mission_briefing/locke",
-        the_butcher = "guis/textures/restoration/mission_briefing/butcher",
-        the_dentist = "guis/textures/restoration/mission_briefing/dentist",
-        the_elephant = "guis/textures/pd2/mission_briefing/the_elephant/the_elephant",
-        vlad = "guis/textures/pd2/mission_briefing/vlad/contact",
-		the_continental = "guis/textures/restoration/mission_briefing/the_continental",
-		events = "guis/textures/restoration/mission_briefing/event",
-		shatter = "guis/textures/restoration/mission_briefing/shatter",
-		akashic = "guis/textures/pd2/mission_briefing/hector/contact",
-		jiufeng = "guis/textures/restoration/mission_briefing/jiufeng",
-		shayu = "guis/textures/restoration/mission_briefing/shayu",
-		mcshay = "guis/textures/restoration/mission_briefing/mcshay",
-		blaine = "guis/textures/restoration/mission_briefing/blaine",
-		--Support for "Campaign Contract Sorting" mod (aka thanks OVK that you made random contractors and give them only 1 heist)
-		silkroad = "guis/textures/restoration/mission_briefing/locke",
-		cityofgold = "guis/textures/restoration/mission_briefing/jiufeng",
-		texasheat = "guis/textures/restoration/mission_briefing/mcshay",
-		--Holdout is exists, I guess
-		skirmish = "guis/textures/restoration/mission_briefing/event"
-    }
-	local image = "guis/textures/restoration/mission_briefing/unknown"
-	if set_image[contact] then
-            image = set_image[contact]
-    end
-    local set_pattern = {
-        hector = "guis/textures/pd2/mission_briefing/hector/bd_pattern",
-		vlad = "guis/textures/pd2/mission_briefing/vlad/bd_pattern",
-		the_elephant = "guis/textures/pd2/mission_briefing/the_elephant/bd_pattern",
-		classic = "guis/textures/pd2/mission_briefing/bain/bd_pattern",
-        events = "guis/textures/pd2/mission_briefing/bain/bd_pattern",
-        hoxton = "guis/textures/pd2/mission_briefing/bain/bd_pattern",
-        jimmy = "guis/dlcs/berry/textures/pd2/mission_briefing/bd_pattern",
-        locke = "guis/dlcs/berry/textures/pd2/mission_briefing/bd_pattern",
-        the_butcher = "guis/dlcs/the_bomb/textures/pd2/mission_briefing/bd_pattern",
-        the_dentist = "guis/dlcs/big_bank/textures/pd2/mission_briefing/bd_pattern",
-		the_continental = "guis/textures/pd2/mission_briefing/bain/bd_pattern",
-		shatter = "guis/textures/restoration/mission_briefing/shatter_pattern",
-		akashic = "guis/textures/pd2/mission_briefing/hector/bd_pattern",
-		jiufeng = "guis/dlcs/chas/textures/pd2/mission_briefing/bd_pattern",	--Maybe someday they'll make this unique.
-		shayu = "guis/textures/pd2/mission_briefing/interupt/bd_pattern",  --Need to make unique patterns
-		mcshay = "guis/textures/pd2/mission_briefing/interupt/bd_pattern",
-		blaine = "guis/textures/pd2/mission_briefing/interupt/bd_pattern",
-		skirmish = "guis/textures/restoration/mission_briefing/shatter_pattern"
-    }
-	local pattern = "guis/textures/pd2/mission_briefing/".. contact .."/bd_pattern"
-	if set_pattern[contact] then
-            pattern = set_pattern[contact]
-	else
-            pattern = "guis/textures/pd2/mission_briefing/bain/bd_pattern" -- Solve issue with missing pattern for custom heists
-    end
-	if interupt then
-		image = "guis/textures/pd2/mission_briefing/interupt/contact"
-		pattern = "guis/textures/pd2/mission_briefing/interupt/bd_pattern"
-	end
-	return image, pattern
-	end
-end
-
---[[if not Global.level_data.level_id or not maps[Global.level_data.level_id] then
-    return
-end]]--
-
-local init_actual = HUDMissionBriefing.init
-function HUDMissionBriefing:init(hud, workspace, ...)
-
-    self._current_contact = managers.job:current_contact_id()
-
-    init_actual(self, hud, workspace, ...)
-
-    if self._current_contact ~= "shatter" then
-        return
-    end
-
-    local bg2 = self._background_layer_two
-    -- Unlikely to ever happen, but just in case
-    if not alive(bg2) then
-        return
-    end
-
-    -- Wipe everything on self._background_layer_two. Removing them while iterating is probably not a wise idea (may cause
-    -- instability), so copy the references over to a new, temporary table first
-    local tmp = {}
-    for _, panel in pairs(bg2:children() or {}) do
-        table.insert(tmp, panel)
-    end
-    for index, panel in ipairs(tmp) do
-        bg2:remove(panel)
-    end
-    tmp = nil
-
-    function making_video()
-        --self._contact_image = bg2:bitmap( { name="contact_image", texture="guis/textures/restoration/mission_briefing/shatter", w=720, h=720 } )
-        self._contact_image = bg2:video( { name="contact_image", video = "movies/contact_shatter1", width = 1280, height = 720, blend_mode="add", loop=true, alpha=1 } ) -- , color = tweak_data.screen_color_yellow } )
-    end
-    bg2:stop()
-    bg2:animate(making_video)
-
-    self._backdrop:set_pattern( "guis/textures/restoration/mission_briefing/shatter_pattern", 0.10, "add" )
-end
 end

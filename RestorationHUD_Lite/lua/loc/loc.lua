@@ -48,6 +48,10 @@ end
 -- ResMod english.json
 Hooks:Add("LocalizationManagerPostInit", "ResMod_english_Localization_Init", function(loc)
 	LocalizationManager:add_localized_strings({
+		["debug_no_ammo"] = "NO AMMO",
+		["debug_low_ammo"] = "LOW AMMO",
+		["debug_reload"] = "RELOAD",
+		
 		["menu_es_boost"] = "Boost",
 		["menu_es_crew"] = "Crew",
 		["menu_es_personal"] = "Personal",

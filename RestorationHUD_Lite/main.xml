@@ -10,7 +10,6 @@
     </ScriptMods>
     <Hooks directory="lua">
 	    <hook file="tweak_data/tweakdata.lua" source_file="lib/tweak_data/tweakdata"/>
-		<!-- <hook file="tweak_data/tweakdata.lua" source_file="lib/tweak_data/guitweakdata"/> -->
 		
 		<hook file="managers/HUDManager.lua" source_file="lib/managers/HUDManager"/>
 		<hook file="managers/GUIDataManager.lua" source_file="core/lib/managers/coreguidatamanager"/>
@@ -18,19 +17,21 @@
 		<!-- <hook file="managers/CrimeNetManager.lua" source_file="lib/managers/CrimeNetManager"/> -->
 		
         <!--<hook file="managers/hud/hudassaultcorner.lua" source_file="lib/managers/hud/hudassaultcorner"/> -->
-        <!--<hook file="managers/hud/HUDTemp.lua" source_file="lib/managers/hud/HUDTemp"/>-->
         <hook file="managers/hud/HUDTeammate.lua" source_file="lib/managers/hud/HUDTeammate"/>
 		<hook file="managers/hud/HUDChat.lua" source_file="lib/managers/hud/HUDChat"/>
 		<hook file="managers/hud/HUDHeistTimer.lua" source_file="lib/managers/hud/HUDHeistTimer"/>
 		<hook file="managers/hud/HUDHint.lua" source_file="lib/managers/hud/HUDHint"/>
 		<hook file="managers/hud/HUDPlayerDowned.lua" source_file="lib/managers/hud/HUDPlayerDowned"/>
-		<hook file="managers/hud/HUDPresenter.lua" source_file="lib/managers/hud/HUDPresenter"/>
+		<!-- <hook file="managers/hud/HUDPresenter.lua" source_file="lib/managers/hud/HUDPresenter"/> -->
 		<!-- <hook file="managers/hud/HUDSuspicion.lua" source_file="lib/managers/hud/HUDSuspicion"/> -->
 		<hook file="managers/hud/hudplayercustody.lua" source_file="lib/managers/hud/HUDPlayerCustody"/>
-		<!-- <hook file="managers/hud/HUDStageEndScreen.lua" source_file="lib/managers/hud/HUDStageEndScreen"/>
-		<hook file="managers/hud/HUDMissionBriefing.lua" source_file="lib/managers/hud/HUDMissionBriefing"/> -->
-		<hook file="managers/hud/HUDArmorFix.lua" source_file="lib/managers/hud/HUDTeammate"/>
+		<!-- <hook file="managers/hud/HUDStageEndScreen.lua" source_file="lib/managers/hud/HUDStageEndScreen"/> -->
+		<!-- <hook file="managers/hud/HUDArmorFix.lua" source_file="lib/managers/hud/HUDTeammate"/> -->
+		<hook source_file="lib/tweak_data/LevelsTweakData" file="tweak_data/levelstweakdata.lua"/>
 		
+		<hook source_file="lib/units/enemies/cop/copdamage" file="managers/CopDamage.lua"/>
+		<hook source_file="lib/managers/group_ai_states/GroupAIStateBase" file="managers/group_ai_states/groupaistatebase.lua"/>
+		<hook source_file="lib/units/props/securitycamera" file="managers/SecurityCamera.lua"/>
 		<hook source_file="lib/managers/menu/menucomponentmanager" file="managers/menu/bannerless.lua"/>
 		<hook source_file="lib/managers/menu/menucomponentmanager" file="managers/menu/menucomponentmanager.lua"/>
 		<hook source_file="lib/managers/menu/menurenderer" file="managers/menu/menurenderer.lua"/>
@@ -39,95 +40,11 @@
 		<hook file="managers/menu/MenuBackdropGUI.lua" source_file="lib/managers/menu/MenuBackdropGUI"/>
 		<hook file="managers/menu/MenuPauseRenderer.lua" source_file="lib/managers/menu/MenuPauseRenderer"/>
 		<hook file="managers/menu/playerinventorygui.lua" source_file="lib/managers/menu/playerinventorygui"/>
-		<hook file="managers/menu/renderers/menunodejukeboxgui.lua" source_file="lib/managers/menu/renderers/menunodejukeboxgui"/>
+	<!--<hook file="managers/menu/renderers/menunodejukeboxgui.lua" source_file="lib/managers/menu/renderers/menunodejukeboxgui"/>-->
 		
 		<hook file="managers/menumanager.lua" source_file="lib/managers/menumanager"/>
 		<hook file="managers/menu/menunodegui.lua" source_file="lib/managers/menu/menunodegui"/>
 		<hook file="loc/coreloc.lua" source_file="lib/managers/localizationmanager"/>
     </Hooks>
-    <!-- <Localization directory="loc" default="english.json">
-    </Localization> -->
-	<!--///MOD SETTINGS\\\-->
-    <Options name="Options" auto_build_menu="true" auto_load="true" save_file="restorationhud.txt" value_changed="RestorationCoreCallbacks:ValueChanged">
-	    <options>
-			<option_group name="HUD">
-				<option_group name="Colors">
-					<merge_data area_bg="half"/>
-					<option type="color" default_value="Color(0.3, 0.77, 1)" name="ObjectivesBG" desc_id="RestorationModColorOption"/>
-					<option type="color" default_value="Color.black" name="ObjectivesFG" desc_id="RestorationModColorOption"/>
-
-					<option type="color" default_value="Color(1, 0.8, 0)" name="AssaultBG" desc_id="RestorationModColorOption"/>
-					<option type="color" default_value="Color(1, 0.5, 0)" name="AssaultEndlessBG" desc_id="RestorationModColorOption"/>
-					<option type="color" default_value="Color(0.12, 0.9, 0.12)" name="AssaultSurvivedBG" desc_id="RestorationModColorOption"/>
-					<option type="color" default_value="Color.black" name="AssaultFG" desc_id="RestorationModColorOption"/>
-
-					<option type="color" default_value="Color(0.6, 0.6, 0.6)" name="Stamina" desc_id="RestorationModColorOption"/>
-					<option type="color" default_value="Color.white" name="StaminaThreshold" desc_id="RestorationModColorOption"/>
-
-					<option type="color" default_value="Color.white" name="BagBitmap" desc_id="RestorationModColorOption"/>
-					<option type="color" default_value="Color.black" name="BagText" desc_id="RestorationModColorOption"/>
-
-					<option type="color" default_value="Color.red" name="NoReturnText" desc_id="RestorationModColorOption"/>
-					<option type="color" default_value="Color.white" name="HostagesText" desc_id="RestorationModColorOption"/>
-					<option type="color" default_value="Color.white" name="TimerText" desc_id="RestorationModColorOption"/>
-					<option type="color" default_value="Color.white" name="HintText" desc_id="RestorationModColorOption"/>
-					<option type="color" default_value="Color.white" name="MaskOnText" desc_id="RestorationModColorOption"/>
-
-					<option type="color" default_value="Color.white" name="DownsThreePlus" desc_id="RestorationModColorOption"/>
-					<option type="color" default_value="Color.yellow" name="DownsTwo" desc_id="RestorationModColorOption"/>
-					<option type="color" default_value="Color(1, 0.37, 0)" name="DownsOne" desc_id="RestorationModColorOption"/>
-					<option type="color" default_value="Color.red" name="DownsZero" desc_id="RestorationModColorOption"/>
-				</option_group>
-				<option_group name="Extra">
-					<merge_data area_bg="half"/>
-					<option type="number" default_value="1" min="0.1" max="1.5" step="0.01" show_value="true" name="Scale"/>
-					<option type="number" default_value="0.936" min="0.1" max="1" step="0.01" show_value="true" name="SizeOnScreen"/>
-					<option type="bool" default_value="false" name="StealthOrigPos"/>
-					<option type="bool" default_value="false" name="LowerBag"/>
-					<option type="bool" default_value="true" name="MusicShuffle"/>
-					<option type="bool" default_value="false" name="ClassicMovies"/>
-					<option type="bool" default_value="false" name="RealAmmo"/>
-					<option type="bool" default_value="false" name="VoiceIcon"/>
-					<option type="bool" default_value="false" name="ArmorFix"/>
-					<!-- <option type="bool" default_value="false" name="CasingTicker"/> -->
-				</option_group>
-				<option_group name="UI">
-					<merge_data area_bg="half"/>
-						<option type="bool" default_value="false" name="Pause"/>
-						<option type="bool" default_value="false" name="Profile"/>
-						<option type="bool" default_value="false" name="Crimenet"/>
-						<option type="bool" default_value="false" name="Newsfeed"/>
-						<option type="multichoice" default_value="1" name="NewsFeedStyle" values_tbl="restoration.newsfeed_style"/>
-						<option type="bool" default_value="false" name="DifficultyMarkers"/>
-						<option type="bool" default_value="false" name="BlackScreen"/>
-						<option type="bool" default_value="false" name="Loadouts"/>
-						<option type="number" default_value="13" min="10" max="25" step="1" show_value="true" name="BriefingFontSize"/>
-						<option type="bool" default_value="false" name="District"/>
-						<option type="bool" default_value="false" name="PeerColors"/>
-						<option type="bool" default_value="false" name="PocoCrimenetAlignSort"/>
-						<option type="number" default_value="1" min="0.7" max="1.2" step="0.1" show_value="true" name="PocoCrimenetScale"/>
-				</option_group>
-				<option type="bool" default_value="false" name="MainHUD"/>
-				<option type="bool" default_value="true" name="Teammate"/>
-				<option type="bool" default_value="true" name="ObjectivesPanel"/>
-				<option type="bool" default_value="true" name="AssaultPanel"/>
-				<option type="multichoice" default_value="1" name="AssaultStyle" values_tbl="restoration.assault_style"/>
-				<option type="bool" default_value="true" name="StaminaIndicator"/>
-				<option type="bool" default_value="true" name="Waypoints"/>
-				<option type="bool" default_value="true" name="NameLabels"/>
-				<option type="bool" default_value="true" name="Presenter"/>
-				<option type="bool" default_value="true" name="Interaction"/>
-				<option type="bool" default_value="true" name="Stealth"/>
-				<option type="bool" default_value="true" name="Down"/>
-				<option type="bool" default_value="true" name="Bag"/>
-				<option type="bool" default_value="true" name="HeistTimer"/>
-				<option type="bool" default_value="true" name="Hint"/>
-				<option type="bool" default_value="true" name="MaskOn"/>
-				<option type="bool" default_value="false" name="Hostage"/>
-				<option type="bool" default_value="false" name="Custody"/>
-				<option type="bool" default_value="true" name="UppercaseNames"/>
-			</option_group>
-        </options>
-    </Options>
 	<AddFiles file="addhudmisc.xml"/>
 </mod>

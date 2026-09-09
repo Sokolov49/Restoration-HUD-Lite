@@ -12,7 +12,7 @@ RestorationCoreHooks:Post(HUDHint, "init", function(self)
 	hide_shit(self._hint_panel:child("clip_panel"))
 	self._hint_panel:text({
 		name = "hint_text",
-		font_size = 24,
+		font_size = 22,
 		font = tweak_data.menu.medium_font_no_outline,
 		align = "center",
 		vertical = "center",
@@ -20,7 +20,7 @@ RestorationCoreHooks:Post(HUDHint, "init", function(self)
 		wrap = false,
 		word_wrap = false
 	})
-	self._hint_panel:text({name = "hint_shadow_text", font_size = 24, font = tweak_data.menu.medium_font_no_outline, color = Color.black, align = "center", vertical = "center", layer = 0, wrap = false, word_wrap = false, y = 1, x = 1})
+	self._hint_panel:text({name = "hint_shadow_text", font_size = 22, font = tweak_data.menu.medium_font_no_outline, color = Color.black, align = "center", vertical = "center", layer = 0, wrap = false, word_wrap = false, y = 1, x = 1})
 	RestorationCoreCallbacks:AddValueChangedFunc(callback(self, self, "RestorationValueChanged"))
 	self:RestorationValueChanged()
 end)
