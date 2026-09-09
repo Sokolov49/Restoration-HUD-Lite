@@ -46,6 +46,8 @@ function LevelLoadingScreenGuiScript:init(scene_gui, res, progress, base_layer)
 	self._safe_rect = safe_rect
 	self._gui_data_manager = GuiDataManager:new(self._scene_gui, res, safe_rect_pixels, safe_rect, aspect_ratio)
 	self._back_drop_gui = MenuBackdropGUI:new(nil, self._gui_data_manager, true)
+	self._back_drop_gui:enable_light(false)
+	self._back_drop_gui._panel:child("base_layer"):child("bd_base_layer"):hide()
 
 	-- self._back_drop_gui:set_pattern("guis/textures/loading/loading_foreground", 1)
 	
