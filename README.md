@@ -1,3 +1,6 @@
+# THIS BRANCH IS OUTDATED, IF YOU WANT TO USE THIS HUD ON x64 THEN USE THE OTHER BRANCH
+
+
 # This Fork preserves the in-game HUD layout of the mod and deletes everything else.
 
 Because this is all I want to play the game, but no one would bother to make a true 2013-like HUD.
