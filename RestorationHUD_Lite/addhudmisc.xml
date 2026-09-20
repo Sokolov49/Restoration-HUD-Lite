@@ -12,9 +12,16 @@
 	<texture path="guis/textures/restoration/hud_absorb_stack_bg"/>
 	<texture path="guis/textures/restoration/hud_absorb_shield"/>
 	<texture path="guis/textures/restoration/hud_absorb_health"/>
+	<texture path="guis/textures/drill_screen_background"/>
+	<texture path="guis/textures/pd2/risklevel_blackscreen"/>
+	<texture path="guis/textures/pd2/risklevel_deathwish_blackscreen"/>
+	<texture path="guis/textures/pd2/risklevel_deathwish_easywish_blackscreen"/>
+	<texture path="guis/textures/pd2/risklevel_deathwish_sm_blackscreen"/>
+	<texture path="guis/textures/pd2/pd2_waypoints"/>
 	<texture path="guis/textures/loading/loading_bg"/>
 	<texture path="guis/textures/loading/loading_foreground"/>
 	<font path="fonts/font_medium_shadow" force="true"/>
+	<gui path="guis/timer_gui"/>
 	<!-- <merged_font path="fonts/font_medium_shadow_mf" force="true"/>
 	<merged_font path="fonts/font_small_shadow_mf" force="true"/>
 	<merged_font path="fonts/font_medium_noshadow_mf" force="true"/> -->
