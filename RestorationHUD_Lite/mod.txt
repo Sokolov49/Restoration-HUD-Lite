@@ -12,7 +12,7 @@
 	"updates" : [{
 		"identifier" : "hudmod",
 		"host": {
-			"meta": "https://raw.githubusercontent.com/Sokolov49/pepemods/refs/heads/main/meta.json",
+			"meta": "https://raw.githubusercontent.com/Sokolov49/Restoration-HUD-Lite/refs/heads/x64/meta.json",
 		}
 	}],
     "hooks" : [
