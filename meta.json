@@ -2,7 +2,7 @@
   {
     "ident": "hudmod",
     "version": "1.3",
-    "patchnotes_url": "https://html-preview.github.io/?url=https://github.com/Sokolov49/pepemods/blob/main/changelog/patchnotes.html",
-    "download_url": "https://github.com/Sokolov49/Restoration-HUD-Lite/raw/refs/heads/x64/RestorationHUD_Lite.zip"
+    "patchnotes_url": "https://html-preview.github.io/?url=https://github.com/Sokolov49/Restoration-HUD-Lite/blob/x64/changelog/patchnotes.html",
+    "download_url": "https://github.com/Sokolov49/Restoration-HUD-Lite/blob/x64/RestorationHUD_Lite.zip"
   }
 ]
