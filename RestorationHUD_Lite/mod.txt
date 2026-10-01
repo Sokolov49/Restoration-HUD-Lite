@@ -9,12 +9,6 @@
     "image" : "res.png",
     "undisablable" : false,
     "disable_safe_mode" : false,
-	"updates" : [{
-		"identifier" : "hudmod",
-		"host": {
-			"meta": "https://github.com/Sokolov49/Restoration-HUD-Lite/blob/x64/meta.json",
-		}
-	}],
     "hooks" : [
         { 	"hook_id" : "lib/utils/levelloadingscreenguiscript",
             "script_path" : "lua/levelloadingscreenguiscript.lua"
