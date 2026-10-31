@@ -20,6 +20,8 @@
 	<texture path="guis/textures/pd2/pd2_waypoints"/>
 	<texture path="guis/textures/loading/loading_bg"/>
 	<texture path="guis/textures/loading/loading_foreground"/>
+	
+	<texture path="guis/textures/pd2/mission_briefing/calendar_xo"/>
 
 	<texture path="guis/textures/pd2/mission_briefing/butcher"/>
 	<texture path="guis/textures/pd2/mission_briefing/classic"/>
