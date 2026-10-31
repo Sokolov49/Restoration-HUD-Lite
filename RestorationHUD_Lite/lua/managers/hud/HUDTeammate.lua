@@ -1134,9 +1134,11 @@ function HUDTeammate:set_voice_com(status)
 end
 
 function HUDTeammate:set_callsign(id)
-	local teammate_panel = self._panel
-	local callsign = teammate_panel:child("callsign")
+	local cus_color = tweak_data.chat_colors[id] or tweak_data.chat_colors[#tweak_data.chat_colors]
+	local callsign = self._panel:child("callsign")
 	local alpha = callsign:color().a
-
 	callsign:set_color((tweak_data.chat_colors[id] or tweak_data.chat_colors[#tweak_data.chat_colors]):with_alpha(alpha))
+	
+	local name = self._panel:child("name")
+	name:set_color((tweak_data.chat_colors[id] or tweak_data.chat_colors[#tweak_data.chat_colors]):with_alpha(alpha))
 end

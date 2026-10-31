@@ -6,7 +6,7 @@
 	<texture path="guis/textures/restoration/hud_pickups"/>
 	<texture path="guis/textures/restoration/throwables"/>
 	<texture path="guis/textures/restoration/equipment"/>
-<!--<texture path="guis/textures/restoration/objective"/>-->
+	<texture path="guis/textures/pd2/menu_backdrop/bd_baselayer"/>
 	<texture path="guis/textures/restoration/hud_radialbg"/>
 	<texture path="guis/textures/restoration/hud_absorb_stack_fg"/>
 	<texture path="guis/textures/restoration/hud_absorb_stack_bg"/>
@@ -20,13 +20,25 @@
 	<texture path="guis/textures/pd2/pd2_waypoints"/>
 	<texture path="guis/textures/loading/loading_bg"/>
 	<texture path="guis/textures/loading/loading_foreground"/>
-	<font path="fonts/font_medium_shadow" force="true"/>
-	<gui path="guis/timer_gui"/>
-	<!-- <merged_font path="fonts/font_medium_shadow_mf" force="true"/>
-	<merged_font path="fonts/font_small_shadow_mf" force="true"/>
-	<merged_font path="fonts/font_medium_noshadow_mf" force="true"/> -->
-	
-	<!-- Health Circle++ Fix
-	<texture path="guis/textures/pd2/hud_health_fake" force="true"/> -->
 
+	<texture path="guis/textures/pd2/mission_briefing/butcher"/>
+	<texture path="guis/textures/pd2/mission_briefing/classic"/>
+	<texture path="guis/textures/pd2/mission_briefing/dentist"/>
+	<texture path="guis/textures/pd2/mission_briefing/event"/>
+	<texture path="guis/textures/pd2/mission_briefing/jimmy"/>
+	<texture path="guis/textures/pd2/mission_briefing/jiufeng"/>
+	<texture path="guis/textures/pd2/mission_briefing/locke"/>
+	<texture path="guis/textures/pd2/mission_briefing/mcshay"/>
+	<texture path="guis/textures/pd2/mission_briefing/shayu"/>
+	<texture path="guis/textures/pd2/mission_briefing/the_continental"/>
+	<texture path="guis/textures/pd2/mission_briefing/bain/bd_pattern"/>
+	<texture path="guis/textures/pd2/mission_briefing/butcher/bd_pattern"/>
+	<texture path="guis/textures/pd2/mission_briefing/dentist/bd_pattern"/>
+	<texture path="guis/textures/pd2/mission_briefing/hector/bd_pattern"/>
+	<texture path="guis/textures/pd2/mission_briefing/interupt/bd_pattern"/>
+	<texture path="guis/textures/pd2/mission_briefing/murkywater/bd_pattern"/>
+	<texture path="guis/textures/pd2/mission_briefing/the_elephant/bd_pattern"/>
+	<texture path="guis/textures/pd2/mission_briefing/vlad/bd_pattern"/>
+
+	<gui path="guis/timer_gui"/>
 </table>

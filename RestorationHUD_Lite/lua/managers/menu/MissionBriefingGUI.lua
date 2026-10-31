@@ -17,7 +17,7 @@
 			x = offset,
 			align = "center",
 			vertical = "center",
-			font_size = 28,
+			font_size = 38,
 			font = tweak_data.menu.default_font,
 			color = tweak_data.screen_color_blue_selected,
 			layer = 1
@@ -94,7 +94,7 @@
 			if self._tab_text:inside(x, y) then
 				if not self._highlighted then
 					self._highlighted = true
-					self._tab_text:set_color(tweak_data.screen_color_blue_highlighted)
+					self._tab_text:set_color(tweak_data.screen_color_blue_selected)
 					managers.menu_component:post_event("highlight")
 				end
 			elseif self._highlighted then
@@ -122,7 +122,7 @@
 		local title_text = self._panel:text({
 			name = "title_text",
 			text = managers.localization:to_upper_text(name_id),
-			font_size = 28,
+			font_size = 32,
 			font = tweak_data.menu.default_font,
 			y = 10,
 			x = 10,
@@ -136,7 +136,7 @@
 			pro_text = self._panel:text({
 				name = "pro_text",
 				text = managers.localization:to_upper_text("cn_menu_pro_job"),
-				font_size = 28,
+				font_size = 36,
 				font = tweak_data.menu.default_font,
 				color = tweak_data.screen_colors.pro_color
 			})
@@ -154,10 +154,10 @@
 		if is_level_ghostable and Network:is_server() then
 			desc_string = desc_string
 		end
-		local font_size_default = 24
+		local font_size_default = 14
 		local font_default = tweak_data.menu.small_font
 		if russian then
-			font_size_default = 28
+			font_size_default = 14
 			font_default = tweak_data.menu.pd2_small_font
 		end
 		local desc_text = self._scroll_panel:text({
@@ -414,7 +414,7 @@
 			y = 10,
 			x = 10,
 			text = managers.localization:to_upper_text("menu_cn_mutators_active"),
-			font_size = 28,
+			font_size = 32,
 			font = tweak_data.menu.default_font,
 			color = tweak_data.screen_color_blue
 		})
@@ -446,7 +446,7 @@
 				x = 10,
 				name = "mutator_text_" .. tostring(mutator:id()),
 				font = tweak_data.menu.small_font,
-				font_size = 14,
+				font_size = 18,
 				text = text,
 				y = _y,
 				w = self._panel:w() - 5,
@@ -480,7 +480,7 @@
 			text = ready_text,
 			align = "right",
 			vertical = "center",
-			font_size = 32,
+			font_size = 36,
 			font = tweak_data.menu.medium_font,
 			color = tweak_data.screen_color_yellow,
 			layer = 2,
@@ -623,7 +623,7 @@
 			text = managers.localization:to_upper_text("menu_" .. mutator_category .. "s" .. "_lobby_wait_title"),
 			align = "right",
 			vertical = "top",
-			font_size = 36,
+			font_size = 16,
 			font = tweak_data.menu.medium_font,
 			color = managers.mutators:get_category_text_color(mutator_category),
 			layer = self._ready_button:layer()

@@ -10,7 +10,7 @@ function HUDMissionBriefing:init(hud, workspace)
 	local content_font = tweak_data.menu.default_font
 	local text_font = tweak_data.menu.default_font
 	local bg_font_size = tweak_data.menu.pd2_massive_font_size
-	local title_font_size = 36
+	local title_font_size = 52
 	local content_font_size = 32
 	local text_font_size = tweak_data.menu.default_font_size
 	local interupt_stage = managers.job:interupt_stage()
@@ -171,18 +171,19 @@ function HUDMissionBriefing:init(hud, workspace)
 	self._job_class = self._current_job_data and self._current_job_data.jc or 0
 	local show_contact_gui = true
 	if managers.crime_spree:is_active() then
-		self._backdrop:set_pattern("guis/textures/pd2/mission_briefing/bain/bd_pattern", 0.1, "add")
+		self._backdrop:set_pattern("guis/textures/pd2/mission_briefing/bain/bd_pattern", 0.2, "normal")
 		show_contact_gui = false
 	end
 	self._current_contact = managers.job:current_contact_id()
 	local level_id = Global.game_settings.level_id
 
-	local image, pattern = self:set_contact_info(self._current_contact, interupt_stage)
-	local contact_image = self._background_layer_two:bitmap( { name="contact_image", texture=image, w=720, h=720 } )
-	if pattern then
-		self._backdrop:set_pattern(pattern, 0.1, "add")
+	if show_contact_gui then
+		local image, pattern = self:set_contact_info(self._current_contact, interupt_stage)
+		local contact_image = self._background_layer_two:bitmap( { name="contact_image", texture=image, w=720, h=720 } )
+		if pattern then
+			self._backdrop:set_pattern(pattern, 0.4, "add") --sub
+		end
 	end
-	
 	local padding_y = 70
 	self._paygrade_panel = self._background_layer_one:panel({
 		h = 70,
@@ -304,18 +305,27 @@ function HUDMissionBriefing:init(hud, workspace)
 	local chain = self._current_job_chain and self._current_job_chain or {}
 	local js_w = self._job_schedule_panel:w() / 7
 	local js_h = self._job_schedule_panel:h()
-	for i = 1, 14 do
+	for i = 1, 7 do
 		local day_font = text_font
 		local day_font_size = text_font_size
+
 		day_color = tweak_data.screen_colors.item_stage_1
 
-		day_color = tweak_data.screen_color_white:with_alpha( ( (i > num_stages) and 0.1 ) or ( (i < managers.job:current_stage()) and 0.5 ) or 1 )
+		if num_stages < i then
+			day_color = tweak_data.screen_colors.item_stage_3
+		elseif i == managers.job:current_stage() then
+			day_font = content_font
+			day_font_size = content_font_size
+		end
 
 		local day_text = self._job_schedule_panel:text({
-			name = "day_" .. tostring(i),
-			text = ("D" .. tostring(i) ),
 			align = "center",
+			blend_mode = "add",
 			vertical = "center",
+			name = "day_" .. tostring(i),
+			text = utf8.to_upper(managers.localization:text("menu_day_short", {
+				day = tostring(i)
+			})),
 			font_size = day_font_size,
 			font = day_font,
 			w = js_w,
@@ -323,54 +333,82 @@ function HUDMissionBriefing:init(hud, workspace)
 			color = day_color
 		})
 
-		local poly = self._job_schedule_panel:polyline( { name="day_poly_"..tostring(i), color=day_color, blend_mode="add", x=1+((i-1)%7)*78, y=10+math.floor((i-1)/7)*55, w=73, h=50 } )
-		poly:set_points( { Vector3( 0, 0 ), Vector3( 73, 0 ), Vector3( 73, 50 ), Vector3( 0, 50 ) } )
-		poly:set_closed( true )
-
-		poly = self._job_schedule_panel:polyline( { name="day_poly2_"..tostring(i), color=day_color:with_alpha(day_color.alpha*0.5), blend_mode="add", x=1+((i-1)%7)*78, y=10+math.floor((i-1)/7)*55, w=73, h=50 } )
-		poly:set_points( { Vector3( 1, 1 ), Vector3( 72, 1 ), Vector3( 72, 49 ), Vector3( 1, 49 ) } )
-		poly:set_closed( true )
-
-		day_text:set_center( self._job_schedule_panel:child( "day_poly_"..tostring(i) ):center() )
-		day_text:move( -25, -14 )
+		day_text:set_left(i == 1 and 0 or self._job_schedule_panel:child("day_" .. tostring(i - 1)):right())
 
 		local ghost = self._job_schedule_panel:bitmap({
-			name = "ghost_" .. tostring(i),
+			blend_mode = "add",
+			h = 16,
 			texture = "guis/textures/pd2/cn_minighost",
 			w = 16,
-			h = 16,
-			blend_mode = "add",
+			name = "ghost_" .. tostring(i),
 			color = tweak_data.screen_colors.ghost_color
 		})
+
 		ghost:set_center(day_text:center_x(), day_text:center_y() + day_text:h() * 0.25)
+
 		local ghost_visible = i <= num_stages and managers.job:is_job_stage_ghostable(managers.job:current_real_job_id(), i)
+
 		ghost:set_visible(ghost_visible)
+
 		if ghost_visible then
 			self:_apply_ghost_color(ghost, i, not Network:is_server())
 		end
 	end
+
+	local stage_crossed_icon = {
+		texture = "guis/textures/pd2/mission_briefing/calendar_xo",
+		texture_rect = {
+			0,
+			0,
+			80,
+			64
+		}
+	}
+	local stage_circled_icon = {
+		texture = "guis/textures/pd2/mission_briefing/calendar_xo",
+		texture_rect = {
+			80,
+			0,
+			80,
+			64
+		}
+	}
+
 	for i = 1, managers.job:current_stage() or 0 do
-		local stage_marker = self._job_schedule_panel:bitmap( { name="stage_done_" .. tostring(i), texture="guis/textures/pd2/mission_briefing/calendar_stamp", texture_rect={i==managers.job:current_stage() and 64 or 0, 0, 64, 64}, w=80, h=70, layer=1, rotation=math.rand(-10, 10) } )
-		stage_marker:set_center( self._job_schedule_panel:child("day_poly_"..tostring(i)):center() )
+		local icon = i == managers.job:current_stage() and stage_circled_icon or stage_crossed_icon
+		local stage_marker = self._job_schedule_panel:bitmap({
+			h = 64,
+			layer = 1,
+			w = 80,
+			name = "stage_done_" .. tostring(i),
+			texture = icon.texture,
+			texture_rect = icon.texture_rect,
+			rotation = math.rand(-10, 10)
+		})
+
+		stage_marker:set_center(self._job_schedule_panel:child("day_" .. tostring(i)):center())
 		stage_marker:move(math.random(4) - 2, math.random(4) - 2)
 	end
+
 	if managers.job:has_active_job() then
 		local payday_stamp = self._job_schedule_panel:bitmap({
+			h = 64,
+			layer = 2,
 			name = "payday_stamp",
-			texture = "guis/textures/restoration/mission_briefing/calendar_payday",
+			texture = "guis/textures/pd2/mission_briefing/calendar_xo",
+			w = 96,
 			texture_rect = {
+				160,
 				0,
-				0,
-				64,
+				96,
 				64
 			},
-			w = 96,
-			h = 70,
-			layer = 2,
 			rotation = math.rand(-5, 5)
 		})
-		payday_stamp:set_center( self._job_schedule_panel:child("day_poly_"..tostring(num_stages)):center() )
-		payday_stamp:move(math.random(4) - 2, math.random(4) - 2)
+
+		payday_stamp:set_center(self._job_schedule_panel:child("day_" .. tostring(num_stages)):center())
+		payday_stamp:move(math.random(4) - 2 - 7, math.random(4) - 2 + 8)
+
 		if payday_stamp:rotation() == 0 then
 			payday_stamp:set_rotation(1)
 		end
@@ -378,12 +416,12 @@ function HUDMissionBriefing:init(hud, workspace)
 	local job_overview_text = self._foreground_layer_one:text({
 		name = "job_overview_text",
 		text = managers.localization:text("menu_job_overview"),
-		h = content_font_size,
+		h = 128,
 		align = "left",
 		vertical = "bpttom",
 		font_size = content_font_size,
 		font = content_font,
-		color = tweak_data.screen_color_blue
+		color = tweak_data.screen_color_blue_selected
 	})
 	local _, _, w, h = job_overview_text:text_rect()
 	job_overview_text:set_size(w, h)
@@ -422,7 +460,7 @@ function HUDMissionBriefing:init(hud, workspace)
 			vertical = "top",
 			font_size = bg_font_size,
 			font = bg_font,
-			color = tweak_data.screen_color_blue,
+			color = tweak_data.screen_colors.important_1,
 			alpha = 0.4
 		})
 		big_text:set_world_center_y(self._foreground_layer_one:child("job_text"):world_center_y())
@@ -702,3 +740,59 @@ function HUDMissionBriefing:remove_player_slot_by_peer_id(peer, reason)
 	slot:child("detection"):set_visible(false)
 	slot:child("detection_value"):set_visible(slot:child("detection"):visible())
 end
+
+function HUDMissionBriefing:set_contact_info(contact, interupt)
+    local set_image = {
+        bain = "guis/textures/pd2/mission_briefing/classic",
+        hoxton = "guis/textures/pd2/mission_briefing/classic",
+        classic = "guis/textures/pd2/mission_briefing/classic",
+        hector = "guis/textures/pd2/mission_briefing/hector/hector",
+        interupt = "guis/textures/pd2/mission_briefing/interupt/contact",
+        jimmy = "guis/textures/pd2/mission_briefing/jimmy",
+        locke = "guis/textures/pd2/mission_briefing/locke",
+        the_butcher = "guis/textures/pd2/mission_briefing/butcher",
+        the_dentist = "guis/textures/pd2/mission_briefing/dentist",
+        the_elephant = "guis/textures/pd2/mission_briefing/the_elephant/the_elephant",
+        vlad = "guis/textures/pd2/mission_briefing/vlad/contact",
+		the_continental = "guis/textures/pd2/mission_briefing/the_continental",
+		events = "guis/textures/pd2/mission_briefing/event",
+		jiufeng = "guis/textures/pd2/mission_briefing/jiufeng",
+		shayu = "guis/textures/pd2/mission_briefing/shayu",
+		mcshay = "guis/textures/pd2/mission_briefing/mcshay",
+		blaine = "guis/textures/pd2/mission_briefing/blaine",
+		skirmish = "guis/textures/pd2/mission_briefing/event"
+    }
+	local image = "guis/textures/pd2/mission_briefing/unknown"
+	if set_image[contact] then
+            image = set_image[contact]
+    end
+    local set_pattern = {
+        hector = "guis/textures/pd2/mission_briefing/hector/bd_pattern",
+		vlad = "guis/textures/pd2/mission_briefing/vlad/bd_pattern",
+		the_elephant = "guis/textures/pd2/mission_briefing/the_elephant/bd_pattern",
+		classic = "guis/textures/pd2/mission_briefing/bain/bd_pattern",
+        events = "guis/textures/pd2/mission_briefing/bain/bd_pattern",
+        hoxton = "guis/textures/pd2/mission_briefing/bain/bd_pattern",
+        jimmy = "guis/textures/pd2/mission_briefing/murkywater/bd_pattern",
+        locke = "guis/textures/pd2/mission_briefing/murkywater/bd_pattern",
+        the_butcher = "guis/textures/pd2/mission_briefing/butcher/bd_pattern",
+        the_dentist = "guis/textures/pd2/mission_briefing/dentist/bd_pattern",
+		the_continental = "guis/textures/pd2/mission_briefing/the_elephant/bd_pattern",
+		jiufeng = "guis/textures/pd2/mission_briefing/bain/bd_pattern",
+		shayu = "guis/textures/pd2/mission_briefing/bain/bd_pattern",
+		mcshay = "guis/textures/pd2/mission_briefing/interupt/bd_pattern",
+		blaine = "guis/textures/pd2/mission_briefing/bain/bd_pattern",
+		skirmish = "guis/textures/pd2/mission_briefing/hector/bd_pattern"
+    }
+	local pattern = "guis/textures/pd2/mission_briefing/".. contact .."/bd_pattern"
+	if set_pattern[contact] then
+            pattern = set_pattern[contact]
+	else
+            pattern = "guis/textures/pd2/mission_briefing/bain/bd_pattern" -- Solve issue with missing pattern for custom heists
+    end
+	if interupt then
+		image = "guis/textures/pd2/mission_briefing/interupt/contact"
+		pattern = "guis/textures/pd2/mission_briefing/interupt/bd_pattern"
+	end
+	return image, pattern
+	end

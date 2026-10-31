@@ -109,7 +109,7 @@ function LevelLoadingScreenGuiScript:init(scene_gui, res, progress, base_layer)
 		text_id = "debug_loading_level",
 		vertical = "top",
 		y = 0,
-		color = Color(0.3, 0.3803921568627451, 0.8392156862745098, 1)
+		color = Color(0.3, 1, 0.8, 0.3)
 	})
 
 	bg_loading_text:set_text(utf8.to_upper(bg_loading_text:text()))
