@@ -154,10 +154,10 @@
 		if is_level_ghostable and Network:is_server() then
 			desc_string = desc_string
 		end
-		local font_size_default = 14
-		local font_default = tweak_data.menu.small_font
+		local font_size_default = 24
+		local font_default = tweak_data.menu.medium_font
 		if russian then
-			font_size_default = 14
+			font_size_default = 18
 			font_default = tweak_data.menu.pd2_small_font
 		end
 		local desc_text = self._scroll_panel:text({
